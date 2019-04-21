@@ -35,7 +35,9 @@
         {% endfor %}
       </div>
     </div>
-    <div class="five wide right column" style="background:grey; margin-left:40px">
+    <div class="five wide right column">
+      {% include "template/profile.nj" %}
+      {% include "template/hotpost.nj" %}
     </div>
   </div>
 
