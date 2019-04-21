@@ -1,23 +1,25 @@
-<div class="ui card profile">
-    <div class="row">
-        <a href="https://github.com/tujiaw">
-            <img class="img" alt="avatar" src="http://ningto.com/img/myavatar.jpg" />
-        </a>
-        <div class="title">
-            <span class="mainTitle">ningto.com</span>
-            <span class="subTitle">Keep it simple,stupid</span>
+<div class="ui card">
+    <div class="content ui middle aligned two column centered grid">
+        <div class="column title">
+            <a href="https://github.com/tujiaw">
+                <img style="width:60px;height:60px" alt="avatar" src="http://ningto.com/img/myavatar.jpg" />
+            </a>
+        </div>
+        <div class="column title">
+            <div class="mainTitle">ningto.com</div>
+            <div class="subTitle">Keep it simple,stupid</div>
         </div>
     </div>
-    <div class="row">
-        <div class="counter">
+    <div class="content ui middle aligned three column centered grid">
+        <div class="counter column">
             <div class="counterTitle">文章数</div>
             <div class="counterNum">{{ right.profile.postCount }}</div>
         </div>
-        <div class="counter">
+        <div class="counter column">
             <div class="counterTitle">总访问量</div>
             <div class="counterNum">{{ right.profile.hitCount }}</div>
         </div>
-        <div class="counter">
+        <div class="counter column">
             <div class="counterTitle">今日访问</div>
             <div class="counterNum">{{ right.profile.hitToday }}</div>
         </div>
