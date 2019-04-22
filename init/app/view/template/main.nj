@@ -6,8 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>ningto - 泞途</title>
+  <link rel="shortcut icon" type="image/ico" href="/public/img/favicon.ico">
   <link rel="stylesheet" type="text/css" href="/public/dist/semantic.css">
-  {% block head_stylesheet %}{% endblock %}
+  <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+  {% block head_stylesheet %}
+  {% endblock %}
   <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
   <script type="text/javascript" src="/public/dist/semantic.min.js"></script>
   {% block head_script %}{% endblock %}
@@ -41,11 +44,12 @@
   </script>
 </head>
 <body>
-<div class="ui inverted menu">
+<div class="ui inverted menu" style="margin-bottom:1em;">
   <div class="ui container">
     <div class="header item">ningto</div>
-    <a class="item">关于</a>
-    <a class="item">归档</a>
+    <a class="item" href="/">首页</a>
+    <a class="item" href="/about">关于</a>
+    <a class="item" href="/archive">归档</a>
     <a class="item">小程序</a>
     <a class="item">书签</a>
     <a class="item">笑话</a>
@@ -74,7 +78,19 @@
   </div>
 </div>
 
-{% block body_content %}{% endblock %}
+<div class="ui column centered grid container">
+  <div class="row">
+    <div class="eleven wide column" >
+        {% block body_content %}Miss body content{% endblock %}
+    </div>
+    <div class="five wide right column">
+      {% include "template/profile.nj" %}
+      {% include "template/hot_post.nj" %}
+      {% include "template/tags_counter.nj" %}
+      {% include "template/archive.nj" %}
+    </div>
+  </div>
+</div>
 
 <div class="ui inverted vertical footer segment">
     <div class="ui center aligned container">
@@ -112,7 +128,7 @@
         </div>
       </div>
       <div class="ui inverted section divider"></div>
-      <img src="https://avatars1.githubusercontent.com/u/5338512?v=3&s=460" class="ui centered mini image">
+      <img src="/public/img/logo_full.png" class="ui centered tiny image">
       <div class="ui horizontal inverted small divided link list">
         <a class="item" href="#">鄂ICP备17003086号</a>
         <a class="item" href="#">Copyright © 2016</a>
@@ -121,7 +137,24 @@
       </div>
     </div>
   </div>
-
+<div class="back_to_top" style="display:none;">回到顶部</div>
+<script type="text/javascript" src="/public/js/home.js"></script>
 {% block body_script %}{% endblock %}
+<script>
+    (function back_to_top() {
+        var lastBttStatus = false;
+        window.addEventListener('scroll', function(event) {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            var bttStatus = scrollTop > 400
+            if (bttStatus != lastBttStatus) {
+                lastBttStatus = bttStatus
+                $(".back_to_top").css('display', bttStatus ? 'block' : 'none'); 
+            }
+        });
+        $('.back_to_top').click(function() {
+            $('body,html').animate({ scrollTop: 0 }, 800);
+        })
+    })()
+</script>
 </body>
 </html>

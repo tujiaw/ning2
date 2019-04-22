@@ -1,0 +1,24 @@
+body {
+    background-color: #e2e2e2;
+    background-image: url(/public/img/shadow_light.png);
+    background-repeat: repeat-x;
+}
+
+.ui.footer.segment {
+    margin: 5em 0em 0em;
+    padding: 5em 0em;
+}
+
+.back_to_top {
+    width: 24px;
+    color: gray;
+    padding: 12px 0px 12px 5px;
+    position: fixed;
+    right: 0px;
+    bottom: 100px;
+    cursor: pointer;
+    text-align: center;
+    z-index: 20;
+    background-color: #fff;
+    border-radius: 12px 0 0 12px;
+}

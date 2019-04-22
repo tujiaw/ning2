@@ -2,6 +2,8 @@
 
 'use strict';
 
+const path = require('path')
+
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */

@@ -1,0 +1,25 @@
+{% extends "template/main.nj" %}
+{% block head_stylesheet %}
+<link rel="stylesheet" href="/public/css/github.css">
+<link rel="stylesheet" href="/public/css/github-markdown.min.css">
+<link rel="stylesheet" href="/public/css/post.css">
+{% endblock %}
+
+{% block body_content %}
+
+<div class="ui piled segment">
+<h2 class="ui header">{{ post.title }}</h2>
+    <div class="markdown-body">
+        {% if post.toc %}
+        <div id="toc">
+            <div id="toc-head">
+                <span>文章目录</span>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </div>
+            {{ post.toc | safe }}
+        </div>
+        {% endif %}
+        {{ post.content | safe }}
+    </div>
+</div>
+{% endblock %}

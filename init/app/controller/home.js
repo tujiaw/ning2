@@ -9,6 +9,13 @@ class HomeController extends Controller {
     const data = await ctx.service.home.list(page)
     await this.ctx.render('home.nj', data);
   }
+
+  async post(id) {
+    const { ctx } = this;
+    console.log(ctx.params.id)
+    const data = await ctx.service.home.post(ctx.params.id)
+    await this.ctx.render('post.nj', data); 
+  }
 }
 
 module.exports = HomeController;

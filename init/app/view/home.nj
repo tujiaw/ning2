@@ -4,42 +4,31 @@
 {% endblock %}
 
 {% block body_content %}
-<div class="ui column centered grid container">
-  <div class="row">
-    <div class="ten wide column" >
-      <div class="ui link one cards">
-        {% for post in posts %}
-          <div class="card">
-            <div class="content">
-              <div class="header">{{ post.title }}</div>
-              <div class="meta">
-              <i class="tags icon"></i>
-                {% for tag in post.tags %}
-                  {% if tag.length > 0 %}
-                      <a href="/tags/{{ tag }}" class="posttags"> {{ tag }}</a>&nbsp;
-                  {% endif %}
-                {% endfor %}
-              </div>
-              <div class="description">{{ post.content }}</div>
-            </div>
-            <div class="extra content">
-              <span class="right floated">
-                {{ post.created_at }}
-              </span>
-              <span>
-                <i class="user icon"></i>
-                阅读({{ post.pv }})
-              </span>
-            </div>
-          </div>
+<div class="ui link one cards">
+{% for post in posts %}
+    <div class="post card" href="/post/{{ post.id }}">
+    <div class="content">
+        <div class="header">{{ post.title }}</div>
+        <div class="meta">
+        <i class="tags icon"></i>
+        {% for tag in post.tags %}
+            {% if tag.length > 0 %}
+                <a href="/tags/{{ tag }}" class="posttags"> {{ tag }}</a>&nbsp;
+            {% endif %}
         {% endfor %}
-      </div>
+        </div>
+        <div class="description">{{ post.content }}</div>
     </div>
-    <div class="five wide right column">
-      {% include "template/profile.nj" %}
-      {% include "template/hotpost.nj" %}
+    <div class="extra content">
+        <span class="right floated">
+        {{ post.created_at }}
+        </span>
+        <span>
+        <i class="user icon"></i>
+        阅读({{ post.pv }})
+        </span>
     </div>
-  </div>
-
+    </div>
+{% endfor %}
 </div>
 {% endblock %}
