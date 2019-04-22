@@ -30,5 +30,26 @@
     </div>
     </div>
 {% endfor %}
+{% if pageNumbers.length > 1 %}
+    <div class="ui tiny buttons">
+        <button class="ui icon button" href="/?page=1">
+            <i class="left chevron icon"></i>
+        </button>
+        {% for number in pageNumbers %}
+            {% if number === 0 %}
+                <button class="ui button">...</button>
+            {% else %}
+                {% if number === page %}
+                    <button class="ui button" href="/?page={{ number }}">{{ number }}</button>            
+                {% else %}
+                    <button class="ui button" href="/?page={{ number }}">{{ number }}</button>
+                {% endif %}
+            {% endif %}
+        {% endfor%}    
+        <button class="ui right icon button" href="/?page={{ lastPage }}">
+            <i class="right chevron icon"></i>
+        </button>
+    </div>
+{% endif %}
 </div>
 {% endblock %}

@@ -87,15 +87,16 @@ async function getRightSidebarData() {
 
 class HomeService extends Service {
   async list(page = 1) {
+    var page = parseInt(page)
     const pagePosts = await PostsModel.getPostsProfile(null, page)
     const totalCount = await PostsModel.getPostsCount(null)
     MongoHelp.addAllCreateDateTime(pagePosts);
     MongoHelp.postsContent2Profile(pagePosts);
 
-    var pageNumbers = [];
-    var lastPage = Math.ceil(totalCount / 20);
+    const pageNumbers = [];
+    const lastPage = Math.ceil(totalCount / 20);
     if (page <= lastPage) {
-      var i = 1;
+      let i = 1;
       if (page <= 3) {
         for (i = 1; i <= page; i++) {
           pageNumbers.push(i);
@@ -114,8 +115,8 @@ class HomeService extends Service {
       }
     }
 
-    var prevPage = Math.max(page - 1, 1);
-    var nextPage = Math.min(lastPage, page + 1);
+    let prevPage = Math.max(page - 1, 1);
+    let nextPage = Math.min(lastPage, page + 1);
     const result = {
       //user: ctx.session.user, // FIXME
       user: {},
@@ -127,6 +128,8 @@ class HomeService extends Service {
       nextPage: nextPage,
       right: await getRightSidebarData()
     }
+
+    console.log(pageNumbers)
     return result;
   }
 

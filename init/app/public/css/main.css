@@ -9,6 +9,20 @@ body {
     padding: 5em 0em;
 }
 
+.ui.tag.labels .label, .ui.tag.label {
+    padding-left: 1.1em;
+    padding-right: 0.8em;
+}
+
+.ui.list .list > a.item, .ui.list > a.item {
+    color: #777;
+}
+
+.ui.list .list > a.item, .ui.list > a.item:hover {
+    color: #444;
+    /* opacity: 0.6; */
+}
+
 .right.column {
     max-width: 300px;
 }
