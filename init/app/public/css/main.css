@@ -9,6 +9,10 @@ body {
     padding: 5em 0em;
 }
 
+.right.column {
+    max-width: 300px;
+}
+
 .back_to_top {
     width: 24px;
     color: gray;

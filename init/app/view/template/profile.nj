@@ -1,5 +1,5 @@
-<div class="ui card">
-    <div class="row content">
+<div class="ui raised segment">
+<div class="row content">
         <div class="ui middle aligned centered grid">
             <div class="six wide column">
                 <a href="https://github.com/tujiaw">

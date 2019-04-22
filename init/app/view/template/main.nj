@@ -22,26 +22,6 @@
     margin-bottom: 110px;
   }
   </style>
-
-  <!--- Example Javascript -->
-  <script>
-  $(document)
-    .ready(function() {
-      $('.ui.menu .ui.dropdown').dropdown({
-        on: 'hover'
-      });
-      $('.ui.menu a.item')
-        .on('click', function() {
-          $(this)
-            .addClass('active')
-            .siblings()
-            .removeClass('active')
-          ;
-        })
-      ;
-    })
-  ;
-  </script>
 </head>
 <body>
 <div class="ui inverted menu" style="margin-bottom:1em;">
@@ -141,6 +121,10 @@
 <script type="text/javascript" src="/public/js/home.js"></script>
 {% block body_script %}{% endblock %}
 <script>
+    $('.ui.menu .ui.dropdown').dropdown({on: 'hover'});
+    $('.ui.menu a.item').on('click', function() {
+        $(this).addClass('active').siblings().removeClass('active');
+    });
     (function back_to_top() {
         var lastBttStatus = false;
         window.addEventListener('scroll', function(event) {

@@ -7,7 +7,7 @@
 
 {% block body_content %}
 
-<div class="ui piled segment">
+<div class="ui segment">
 <h2 class="ui header">{{ post.title }}</h2>
     <div class="markdown-body">
         {% if post.toc %}
