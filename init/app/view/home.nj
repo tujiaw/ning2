@@ -6,8 +6,20 @@
 {% block body_content %}
 <div class="ui link one cards">
 {% for post in posts %}
-    <div class="post card" href="/post/{{ post.id }}">
-    <div class="content">
+    <div class="post card">
+    {% if loop.first and navs and navs.length %}
+    <div class="ui breadcrumb" style="margin:1em;">
+        {% for nav in navs %}
+            {% if loop.last %}
+                <div class="section active">{{ nav.name }}</div>
+            {% else %}
+                <a class="section" href={{ nav.url }}>{{ nav.name }}</a>
+                <div class="divider"> / </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="content" href="/post/{{ post.id }}">
         <div class="header">{{ post.title }}</div>
         <div class="meta">
         <i class="tags icon"></i>

@@ -1,12 +1,12 @@
-<div class="ui raised segment">
+<div class="ui raised segment post_category">
     <a class="ui blue ribbon label">文章分类</a>
     <p></p>
     <div class="ui mini tag labels">
     {% for tag in right.tagsCount %}
-    <a class="ui mini label">
-    {{ tag.name }}
-    <div class="detail" style="margin-left: 0.5em;">{{ tag.count }}</div>
-    </a>
+        <a class="ui mini label" href={{ tag.url }}>
+        {{ tag.name }}
+        <div class="detail" style="margin-left: 0.5em;">{{ tag.count }}</div>
+        </a>
     {% endfor %}
     </div>
 </div>

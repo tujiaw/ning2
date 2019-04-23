@@ -1,26 +1,28 @@
-var mongoose = require('./mongo').mongoose;
-var config = require('../../config/config.model.js');
-var PAGE_COUNT = config.pageCount;
+'use strict';
 
-var PostSchema = new mongoose.Schema({
+const mongoose = require('./mongo').mongoose;
+const config = require('../../config/config.model.js');
+const PAGE_COUNT = config.pageCount;
+
+const PostSchema = new mongoose.Schema({
   author: { type: mongoose.Schema.Types.ObjectId },
   title: { type: String },
   content: { type: String },
   pv: { type: Number },
-  tags: { type: [String] },
+  tags: { type: [ String ] },
   type: { type: String },
 });
 
 PostSchema.statics.getAll = function() {
-    return this.find({}).exec();
+  return this.find({}).exec();
 };
 
 PostSchema.statics.getPostById = function(postId) {
-  return this.findOne({ _id: postId}).exec();
+  return this.findOne({ _id: postId }).exec();
 };
 
 PostSchema.statics.getPostsProfile = function(author, page) {
-  var query = {};
+  const query = {};
   if (author) {
     query.author = author;
   }
@@ -31,14 +33,12 @@ PostSchema.statics.getPostsProfile = function(author, page) {
       .sort({ _id: -1 })
       .exec();
   } else {
-    return this.find(query)
-      .sort({ _id: -1 })
-      .exec();
+    return this.find(query).sort({ _id: -1 }).exec();
   }
 };
 
 PostSchema.statics.getPostsCount = function(author) {
-  var query = {};
+  const query = {};
   if (author) {
     query.author = author;
   }
@@ -83,11 +83,11 @@ PostSchema.statics.delPostById = function(postId, author) {
 };
 
 PostSchema.statics.getPrevPostById = function(postId) {
-  return this.find({ _id: { $gt : postId }}).sort({ _id: 1 }).limit(1).exec();
+  return this.find({ _id: { $gt: postId } }).sort({ _id: 1 }).limit(1).exec();
 }
 
 PostSchema.statics.getNextPostById = function(postId) {
-  return this.find({ _id: { $lt : postId }}).sort({ _id: -1 }).limit(1).exec();
+  return this.find({ _id: { $lt: postId } }).sort({ _id: -1 }).limit(1).exec();
 }
 
 module.exports = mongoose.blogConn.model('Posts', PostSchema);

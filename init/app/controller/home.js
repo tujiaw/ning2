@@ -16,6 +16,17 @@ class HomeController extends Controller {
     const data = await ctx.service.home.post(ctx.params.id);
     await this.ctx.render('post.nj', data);
   }
+
+  async tag() {
+    const { ctx } = this;
+    const { name } = ctx.params;
+    if (name && name.length) {
+      const data = await ctx.service.home.tag(name);
+      await ctx.render('home.nj', data);
+    } else {
+      ctx.redirect('/');
+    }
+  }
 }
 
 module.exports = HomeController;

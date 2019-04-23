@@ -3,7 +3,7 @@
     <p></p>
     <div class="ui relaxed divided list">
     {% for post in right.hotPosts %}
-        <a class="item hotitem">{{ post.title }}</a>
+        <a class="item hotitem" href="/post/{{ post.id }}">{{ post.title }}</a>
     {% endfor %}
     </div>
 </div>

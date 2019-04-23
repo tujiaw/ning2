@@ -1,6 +1,6 @@
 'use strict';
 
-$('.post.card').on('click', function() {
+$('.post.card .content').on('click', function() {
   window.location.href = $(this).attr('href');
 });
 

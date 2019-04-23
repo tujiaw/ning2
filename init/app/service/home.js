@@ -58,6 +58,7 @@ async function getRightSidebarData() {
         } else {
           tagsCount.push({
             name: tag,
+            url: '/tags/' + encodeURIComponent(tag),
             count: 1,
           });
         }
@@ -170,6 +171,57 @@ class HomeService extends Service {
     return { post, comments, prevPost, nextPost,
       right: await getRightSidebarData(),
     };
+  }
+
+  async tag(name) {
+    const page = 1;
+    const pagePosts = await PostsModel.getPostByTag(name);
+    const totalCount = pagePosts.length;
+    MongoHelp.addAllCreateDateTime(pagePosts);
+    MongoHelp.postsContent2Profile(pagePosts);
+
+    const navs = [
+      { name: 'Home', url: '/' },
+      { name, url: '' },
+    ];
+
+    const pageNumbers = [];
+    const lastPage = Math.ceil(totalCount / 20);
+    if (page <= lastPage) {
+      let i = 1;
+      if (page <= 3) {
+        for (i = 1; i <= page; i++) {
+          pageNumbers.push(i);
+        }
+        for (i = page + 1; i <= lastPage && pageNumbers.length < 5; i++) {
+          pageNumbers.push(i);
+        }
+      } else {
+        pageNumbers.push(0);
+        for (i = page - 2; i <= Math.min(page + 2, lastPage); i++) {
+          pageNumbers.push(i);
+        }
+      }
+      if (lastPage > i) {
+        pageNumbers.push(0);
+      }
+    }
+
+    const prevPage = Math.max(page - 1, 1);
+    const nextPage = Math.min(lastPage, page + 1);
+    const result = {
+      // user: ctx.session.user, // FIXME
+      user: {},
+      posts: pagePosts,
+      page,
+      lastPage,
+      pageNumbers,
+      prevPage,
+      nextPage,
+      navs,
+      right: await getRightSidebarData(),
+    };
+    return result;
   }
 }
 
