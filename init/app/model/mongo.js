@@ -1,3 +1,5 @@
+'use strict';
+
 var config = require('../../config/config.model.js');
 var marked = require('marked');
 var mongoose = require('mongoose');

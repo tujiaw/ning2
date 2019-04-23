@@ -3,7 +3,7 @@
     <p></p>
     <div class="ui divided list">
     {% for archive in right.archives %}
-        <a class="item">{{ archive.yearMonth }} ({{ archive.count }})</a>
+        <a class="item" href="/ym/{{ archive.yearMonth }}">{{ archive.yearMonth }} <span style="margin-left:10px;">({{ archive.count }})</span></a>
     {% endfor %}
     </div>
 </div>

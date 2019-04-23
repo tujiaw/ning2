@@ -27,6 +27,17 @@ class HomeController extends Controller {
       ctx.redirect('/');
     }
   }
+
+  async ym() {
+    const { ctx } = this;
+    const { ym } = ctx.params;
+    if (ym && ym.length) {
+      const data = await ctx.service.home.ym(ym);
+      await ctx.render('home.nj', data);
+    } else {
+      ctx.redirect('/');
+    }
+  }
 }
 
 module.exports = HomeController;

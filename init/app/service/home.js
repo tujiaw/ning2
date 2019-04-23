@@ -32,13 +32,28 @@ function getRandomItems(arr, num) {
   return return_array;
 }
 
-async function getRightSidebarData() {
+async function getMainData(page, filter) {
+  page = parseInt(page);
+  page = page || 1;
+  const MAX_PAGE_COUNT = 20;
+  const startIndex = (page - 1) * MAX_PAGE_COUNT;
+  const endIndex = page * MAX_PAGE_COUNT - 1;
   let allPosts = await PostsModel.getPostsProfile();
   allPosts = allPosts.sort((a, b) => (b.pv - a.pv));
+
+  const posts = [];
+  const pageNumbers = [];
   const totalCount = allPosts.length;
   const tagsCount = [];
   const archivesCount = {};
+  let index = 0;
   allPosts.forEach(post => {
+    const ok = filter ? filter(post) : true;
+    if (ok && index >= startIndex && index <= endIndex) {
+      posts.push(post);
+      ++index;
+    }
+
     // 归档
     const createYearMonth = moment(objectIdToTimestamp(post._id)).format('YYYY-MM-DD').substr(0, 7);
     if (createYearMonth.length) {
@@ -66,77 +81,36 @@ async function getRightSidebarData() {
     });
   });
 
-  const result = {};
-  result.profile = {
+  const right = {};
+  right.profile = {
     postCount: totalCount,
     hitCount: 526,
     hitToday: 235462,
   };
   // 热搜
-  result.hotPosts = getRandomItems(allPosts.slice(0, 50), 10);
-  result.tagsCount = tagsCount;
-  result.archives = [];
+  right.hotPosts = getRandomItems(allPosts.slice(0, 50), 10);
+  right.tagsCount = tagsCount;
+  right.archives = [];
   for (const item in archivesCount) {
-    result.archives.push({
+    right.archives.push({
       yearMonth: item,
       count: archivesCount[item],
     });
   }
-  result.archives.sort((a, b) => {
+  right.archives.sort((a, b) => {
     return a.yearMonth > b.yearMonth ? -1 : 1;
   });
-  return result;
+  MongoHelp.addAllCreateDateTime(posts);
+  MongoHelp.postsContent2Profile(posts);
+  return { posts, pageNumbers, right };
 }
 
 class HomeService extends Service {
-  async list(curPage = 1) {
-    let page = parseInt(curPage);
-    page = page || 1;
-    const pagePosts = await PostsModel.getPostsProfile(null, page);
-    const totalCount = await PostsModel.getPostsCount(null);
-    MongoHelp.addAllCreateDateTime(pagePosts);
-    MongoHelp.postsContent2Profile(pagePosts);
-
-    const pageNumbers = [];
-    const lastPage = Math.ceil(totalCount / 20);
-    if (page <= lastPage) {
-      let i = 1;
-      if (page <= 3) {
-        for (i = 1; i <= page; i++) {
-          pageNumbers.push(i);
-        }
-        for (i = page + 1; i <= lastPage && pageNumbers.length < 5; i++) {
-          pageNumbers.push(i);
-        }
-      } else {
-        pageNumbers.push(0);
-        for (i = page - 2; i <= Math.min(page + 2, lastPage); i++) {
-          pageNumbers.push(i);
-        }
-      }
-      if (lastPage > i) {
-        pageNumbers.push(0);
-      }
-    }
-
-    const prevPage = Math.max(page - 1, 1);
-    const nextPage = Math.min(lastPage, page + 1);
-    const result = {
-      // user: ctx.session.user, // FIXME
-      user: {},
-      posts: pagePosts,
-      page,
-      lastPage,
-      pageNumbers,
-      prevPage,
-      nextPage,
-      right: await getRightSidebarData(),
-    };
-    return result;
+  async list(page = 1) {
+    return await getMainData(page);
   }
 
   async post(id) {
-    console.log('post id:' + id);
     const post = await PostsModel.getPostById(id);
     const prevPosts = await PostsModel.getPrevPostById(id);
     const nextPosts = await PostsModel.getNextPostById(id);
@@ -167,60 +141,32 @@ class HomeService extends Service {
         };
       });
     }
-
-    return { post, comments, prevPost, nextPost,
-      right: await getRightSidebarData(),
-    };
+    const { right } = await getMainData();
+    return { post, comments, prevPost, nextPost, right };
   }
 
   async tag(name) {
     const page = 1;
-    const pagePosts = await PostsModel.getPostByTag(name);
-    const totalCount = pagePosts.length;
-    MongoHelp.addAllCreateDateTime(pagePosts);
-    MongoHelp.postsContent2Profile(pagePosts);
-
-    const navs = [
+    name = decodeURIComponent(name);
+    const result = await getMainData(page, function(post) {
+      return post.tags.indexOf(name) >= 0;
+    });
+    result.navs = [
       { name: 'Home', url: '/' },
       { name, url: '' },
     ];
+    return result;
+  }
 
-    const pageNumbers = [];
-    const lastPage = Math.ceil(totalCount / 20);
-    if (page <= lastPage) {
-      let i = 1;
-      if (page <= 3) {
-        for (i = 1; i <= page; i++) {
-          pageNumbers.push(i);
-        }
-        for (i = page + 1; i <= lastPage && pageNumbers.length < 5; i++) {
-          pageNumbers.push(i);
-        }
-      } else {
-        pageNumbers.push(0);
-        for (i = page - 2; i <= Math.min(page + 2, lastPage); i++) {
-          pageNumbers.push(i);
-        }
-      }
-      if (lastPage > i) {
-        pageNumbers.push(0);
-      }
-    }
-
-    const prevPage = Math.max(page - 1, 1);
-    const nextPage = Math.min(lastPage, page + 1);
-    const result = {
-      // user: ctx.session.user, // FIXME
-      user: {},
-      posts: pagePosts,
-      page,
-      lastPage,
-      pageNumbers,
-      prevPage,
-      nextPage,
-      navs,
-      right: await getRightSidebarData(),
-    };
+  async ym(ym) {
+    const page = 1;
+    const result = await getMainData(page, function(post) {
+      return moment(objectIdToTimestamp(post._id)).format('YYYY-MM-DD').substr(0, 7) === ym;
+    });
+    result.navs = [
+      { name: 'Home', url: '/' },
+      { name: ym, url: '' },
+    ];
     return result;
   }
 }
