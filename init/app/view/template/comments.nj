@@ -1,0 +1,165 @@
+<div class="ui raised segment">
+  <div id="post_comments" class="ui minimal comments">
+    <h3 class="ui dividing header">文章评论</h3>
+    {% for comment in comments %}
+    <div class="comment" id={{ comment.id }}>
+      <div class="content">
+        <a class="author">{{ comment.name }}</a>
+        <div class="metadata">
+          <span class="date">{{ comment.created_at }}</span>
+        </div>
+        <div class="text">
+          {{ comment.content }}
+        </div>
+        <div class="actions">
+          <a id="reply">回复</a>
+          <a id="delete">删除</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <form class="ui reply form comments commentInput" role="form" action="/comments/add" method="post">
+      <input type="hidden" name="postId" value="{{post._id.toString()}}" />
+      <div class="field">
+        <textarea id="content" name="content"></textarea>
+      </div>
+      <div class="row field">
+        <div class="two fields">
+          <div class="field">
+            <label>验证码</label>
+            <input id="captcha" name="captcha" type="text" placeholder="验证码">
+          </div>
+          <div id="svgCaptcha" class="field" value=""></div>
+        </div>
+        <div class="ui field">
+          <label>用户名</label>
+          <input id="name" name="name" type="text" placeholder="用户名">
+        </div>
+      </div>
+      <button class="ui blue labeled submit icon button" type="submit">
+        <i class="icon edit"></i> 发表评论
+      </button>
+    </form>
+    <div class="ui bottom attached warning message" style="display:none;">
+      <i class="icon help"></i>
+      <span></span>
+    </div>
+  </div>
+</div>
+<script>
+  (function comments() {
+    function getCookie(c_name) {
+      if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=")
+        if (c_start != -1) {
+          c_start = c_start + c_name.length + 1
+          c_end = document.cookie.indexOf(";", c_start)
+          if (c_end == -1) c_end = document.cookie.length
+          return unescape(document.cookie.substring(c_start, c_end))
+        }
+      }
+      return ""
+    }
+
+    function setCookie(c_name, value, expiredays) {
+      var exdate = new Date()
+      exdate.setDate(exdate.getDate() + expiredays)
+      document.cookie = c_name + "=" + escape(value) +
+        ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
+    }
+
+    $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');// 这行是 Opera 的补丁, 少了它 Opera 是直接用跳的而且画面闪烁
+    $(document).ready(function() {
+      const gotoid = getCookie('goto_id');
+      if (gotoid && gotoid.length) {
+        setCookie('goto_id', '');
+        $body.animate({scrollTop: $('#' + gotoid).offset().top}, 300);
+      }
+    })
+
+    const refreshCaptcha = function () {
+      $.ajax({
+          type: 'GET',
+          url: 'https://ningto.com/captcha',
+          success: function (result) {
+              if (result.data) {
+                  $('#svgCaptcha').html(result.data);
+                  $('#svgCaptcha').attr('value', result.text);
+              }
+          }
+      })
+    }
+
+    refreshCaptcha();
+    $('#svgCaptcha').on('click', function () {
+        refreshCaptcha();
+    })
+
+    $('.comments .submit').on('click', function () {
+        let errMsg = '';
+        const content = $('.commentInput #content').val();
+        const name = $('.commentInput #name').val(); 
+        if (content.length < 3 || content.length > 2048) {
+            errMsg = '评论不合法.';
+        } else if (name.length < 1 || name.length > 64) {
+            errMsg = '姓名不合法.';
+        }
+        //} else if (!/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test($('.commentInput #email').val())) {
+        //    errMsg = '邮箱为空或者格式不正确.';
+        //} 
+        else {
+            const inputCaptcha = $('#captcha').val()
+            const dstCaptcha = $('#svgCaptcha').attr('value')
+            if (inputCaptcha.length && inputCaptcha.toLowerCase() === dstCaptcha.toLowerCase()) {
+              setCookie('goto_id', 'post_comments', 1);
+              return true;
+            } else {
+              errMsg = '验证码不正确，请重新输入或者单击刷新验证码.'
+            }
+        }
+        $('.warning.message span').html(errMsg);
+        $('.warning.message').show();
+        return false;
+    })
+
+    // 解决eggjs csrf报错
+    var csrftoken = getCookie('csrfToken');
+    function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader('x-csrf-token', csrftoken);
+        }
+      },
+    });
+
+    $('.comments #delete').on('click', function () {
+        const commentId = $(this).parents('.comment').attr('id')
+        if (commentId && commentId.length) {
+            $.ajax({
+                type: 'POST',
+                url: '/comments/remove/',
+                data: {
+                    commentId: commentId
+                },
+                success: function (result) {
+                    $('#' + commentId).hide();
+                }
+            })
+        }
+    })
+
+    $('.comments #reply').on('click', function() {
+      const author = $(this).parent().siblings('.author').text();
+      if (author.length) {
+        const inputContent = $('textarea#content')
+        inputContent.val('@' + author + ' ');
+        inputContent.focus();
+        $body.animate({scrollTop: inputContent.offset().top}, 300);
+      }
+    })
+  })();
+</script>
