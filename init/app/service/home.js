@@ -33,24 +33,23 @@ function getRandomItems(arr, num) {
 }
 
 async function getMainData(page, filter) {
-  page = parseInt(page);
-  page = page || 1;
+  const startTime = new Date().getTime();
+  page = parseInt(page) || 1;
   const MAX_PAGE_COUNT = 20;
+  const allPosts = await PostsModel.getPostsProfile();
   const startIndex = (page - 1) * MAX_PAGE_COUNT;
   const endIndex = page * MAX_PAGE_COUNT - 1;
-  let allPosts = await PostsModel.getPostsProfile();
-  allPosts = allPosts.sort((a, b) => (b.pv - a.pv));
-
   const posts = [];
-  const pageNumbers = [];
   const totalCount = allPosts.length;
   const tagsCount = [];
   const archivesCount = {};
   let index = 0;
   allPosts.forEach(post => {
     const ok = filter ? filter(post) : true;
-    if (ok && index >= startIndex && index <= endIndex) {
-      posts.push(post);
+    if (ok) {
+      if (index >= startIndex && index <= endIndex) {
+        posts.push(post);
+      }
       ++index;
     }
 
@@ -81,14 +80,23 @@ async function getMainData(page, filter) {
     });
   });
 
+  let currentTotalPage = parseInt(index / MAX_PAGE_COUNT);
+  currentTotalPage += (index / MAX_PAGE_COUNT) > currentTotalPage ? 1 : 0;
+  const pageTurn = {
+    prev: Math.max(page - 1, 0),
+    next: page >= currentTotalPage ? 0 : page + 1,
+  };
+  console.log(pageTurn);
+
   const right = {};
   right.profile = {
     postCount: totalCount,
-    hitCount: 526,
-    hitToday: 235462,
+    hitCount: 235462,
+    hitToday: 340,
   };
   // 热搜
-  right.hotPosts = getRandomItems(allPosts.slice(0, 50), 10);
+  right.hotPosts = allPosts.sort((a, b) => (b.pv - a.pv));
+  right.hotPosts = getRandomItems(right.hotPosts.slice(0, 50), 10);
   right.tagsCount = tagsCount;
   right.archives = [];
   for (const item in archivesCount) {
@@ -102,11 +110,14 @@ async function getMainData(page, filter) {
   });
   MongoHelp.addAllCreateDateTime(posts);
   MongoHelp.postsContent2Profile(posts);
-  return { posts, pageNumbers, right };
+
+  const endTime = new Date().getTime();
+  console.log('cost:' + (endTime - startTime));
+  return { posts, pageTurn, right };
 }
 
 class HomeService extends Service {
-  async list(page = 1) {
+  async list(page) {
     return await getMainData(page);
   }
 
@@ -145,8 +156,8 @@ class HomeService extends Service {
     return { post, comments, prevPost, nextPost, right };
   }
 
-  async tag(name) {
-    const page = 1;
+  async tag(name, page) {
+    console.log(`tag, name:${name}, page:${page}`);
     name = decodeURIComponent(name);
     const result = await getMainData(page, function(post) {
       return post.tags.indexOf(name) >= 0;
@@ -158,8 +169,7 @@ class HomeService extends Service {
     return result;
   }
 
-  async ym(ym) {
-    const page = 1;
+  async ym(ym, page) {
     const result = await getMainData(page, function(post) {
       return moment(objectIdToTimestamp(post._id)).format('YYYY-MM-DD').substr(0, 7) === ym;
     });

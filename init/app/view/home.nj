@@ -5,64 +5,52 @@
 
 {% block body_content %}
 <div class="ui link one cards">
-{% for post in posts %}
+    {% for post in posts %}
     <div class="post card">
-    {% if loop.first and navs and navs.length %}
-    <div class="ui breadcrumb" style="margin:1em;">
-        {% for nav in navs %}
+        {% if loop.first and navs and navs.length %}
+        <div class="ui breadcrumb" style="margin:1em;">
+            {% for nav in navs %}
             {% if loop.last %}
-                <div class="section active">{{ nav.name }}</div>
+            <div class="section active">{{ nav.name }}</div>
             {% else %}
-                <a class="section" href={{ nav.url }}>{{ nav.name }}</a>
-                <div class="divider"> / </div>
+            <a class="section" href={{ nav.url }}>{{ nav.name }}</a>
+            <div class="divider"> / </div>
             {% endif %}
-        {% endfor %}
-    </div>
-    {% endif %}
-    <div class="content" href="/post/{{ post.id }}">
-        <div class="header">{{ post.title }}</div>
-        <div class="meta">
-        <i class="tags icon"></i>
-        {% for tag in post.tags %}
-            {% if tag.length > 0 %}
-                <a href="/tags/{{ tag }}" class="posttags"> {{ tag }}</a>&nbsp;
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
         </div>
-        <div class="description">{{ post.content }}</div>
-    </div>
-    <div class="extra content">
-        <span class="right floated">
-        {{ post.created_at }}
-        </span>
-        <span>
-        <i class="user icon"></i>
-        阅读({{ post.pv }})
-        </span>
-    </div>
-    </div>
-{% endfor %}
-
-{% if pageNumbers.length > 1 %}
-    <div class="ui tiny buttons">
-        <button class="ui icon button" href="/?page=1">
-            <i class="left chevron icon"></i>
-        </button>
-        {% for number in pageNumbers %}
-            {% if number === 0 %}
-                <button class="ui button">...</button>
-            {% else %}
-                {% if number === page %}
-                    <button class="ui button active" href="/?page={{ number }}">{{ number }}</button>            
-                {% else %}
-                    <button class="ui button" href="/?page={{ number }}">{{ number }}</button>
+        {% endif %}
+        <div class="content" href="/post/{{ post.id }}">
+            <div class="header">{{ post.title }}</div>
+            <div class="meta">
+                <i class="tags icon"></i>
+                {% for tag in post.tags %}
+                {% if tag.length > 0 %}
+                <a href="/tags/{{ tag }}" class="posttags"> {{ tag }}</a>&nbsp;
                 {% endif %}
-            {% endif %}
-        {% endfor%}    
-        <button class="ui right icon button" href="/?page={{ lastPage }}">
+                {% endfor %}
+            </div>
+            <div class="description">{{ post.content }}</div>
+        </div>
+        <div class="extra content">
+            <span class="right floated">
+                {{ post.created_at }}
+            </span>
+            <span>
+                <i class="user icon"></i>
+                阅读({{ post.pv }})
+            </span>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="ui buttons center aligned container">
+        <button id="prevPage" class="ui labeled icon button {% if pageTurn.prev === 0 %}disabled{% endif %}" page={{ pageTurn.prev }}>
+            <i class="left chevron icon"></i>
+            上一页
+        </button>
+        <button id="nextPage" class="ui right labeled icon button {% if pageTurn.next === 0 %}disabled{% endif %}" page={{ pageTurn.next }}>
+            下一页
             <i class="right chevron icon"></i>
         </button>
     </div>
-{% endif %}
 </div>
 {% endblock %}
