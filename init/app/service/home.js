@@ -91,8 +91,8 @@ async function getMainData(page, filter) {
   const right = {};
   right.profile = {
     postCount: totalCount,
-    hitCount: 235462,
-    hitToday: 340,
+    totalhit: 235462,
+    todayhit: 340,
   };
   // 热搜
   right.hotPosts = allPosts.sort((a, b) => (b.pv - a.pv));

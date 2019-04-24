@@ -1,8 +1,4 @@
-/* eslint valid-jsdoc: "off" */
-
 'use strict';
-
-const path = require('path')
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info
@@ -13,7 +9,7 @@ module.exports = appInfo => {
    * @type {Egg.EggAppConfig}
    **/
   const config = {};
-  
+
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1555751651468_1642';
 
@@ -26,7 +22,8 @@ module.exports = appInfo => {
   };
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [ 'midhit' ];
+  config.midhit = { totalhit: 0, todayhit: 0 };
 
   // add your user config here
   const userConfig = {

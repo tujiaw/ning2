@@ -1,31 +1,27 @@
 <div class="ui raised segment">
-<div class="row content">
-        <div class="ui middle aligned centered grid">
-            <div class="six wide column">
-                <a href="https://github.com/tujiaw">
-                    <img style="width:60px;height:60px" alt="avatar" src="http://ningto.com/img/myavatar.jpg" />
-                </a>
-            </div>
-            <div class="ten wide column">
-                <div class="mainTitle">ningto.com</div>
-                <div class="subTitle">Keep it simple,stupid</div>
-            </div>
-        </div>
+  <div class="ui divided items">
+    <div class="item">
+      <div class="ui tiny image">
+        <img src="/public/img/logo_full.png" class="ui tiny image">
+      </div>
+      <div class="middle aligned content">
+        Keep it simple,stupid
+      </div>
     </div>
-    <div class="row content">
-        <div class="ui middle aligned three column centered grid">
-            <div class="column">
-                <div class="name">文章数</div>
-                <div class="num">{{ right.profile.postCount }}</div>
-            </div>
-            <div class="column">
-                <div class="name">总访问量</div>
-                <div class="num">{{ right.profile.hitCount }}</div>
-            </div>
-            <div class="column">
-                <div class="name">今日访问</div>
-                <div class="num">{{ right.profile.hitToday }}</div>
-            </div>
-        </div>
+
+    <div class="item">
+      <div class="middle aligned content">
+        <div class="name">文章数</div>
+        <div class="num">{{ right.profile.postCount }}</div>
+      </div>
+      <div class="middle aligned content">
+        <div class="name">总访问量</div>
+        <div class="num">{{ right.profile.totalhit }}</div>
+      </div>
+      <div class="middle aligned content">
+        <div class="name">今日访问</div>
+        <div class="num">{{ right.profile.todayhit }}</div>
+      </div>
     </div>
+  </div>
 </div>

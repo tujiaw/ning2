@@ -10,7 +10,7 @@ module.exports = {
   },
   async task(ctx) {
     console.log('start job update hit');
-    ctx.app.cache = await SearchKey.hit();
-    console.log('update counter', JSON.stringify(ctx.app.cache));
+    ctx.app.config.midhit = Object.assign(ctx.app.config.midhit, await SearchKey.hit());
+    console.log('update counter', JSON.stringify(ctx.app.config.midhit));
   },
 };
