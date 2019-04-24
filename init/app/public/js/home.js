@@ -1,9 +1,9 @@
 'use strict';
 
 $('.post.card .content').on('click', function() {
-  const href = $(this).attr('href');
-  if (href && href !== 'undefined') {
-    window.location.href = href;
+  const url = $(this).attr('href') || '';
+  if (url.length) {
+    window.location.href = url;
   }
 });
 
