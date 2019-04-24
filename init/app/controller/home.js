@@ -42,6 +42,17 @@ class HomeController extends Controller {
       ctx.redirect('/');
     }
   }
+
+  async search() {
+    const { ctx } = this;
+    const { keyword } = ctx.query;
+    if (keyword && keyword.length) {
+      const data = await ctx.service.home.search(keyword, ctx.query.page);
+      await render(this, 'home.nj', data);
+    } else {
+      ctx.redirect('/');
+    }
+  }
 }
 
 module.exports = HomeController;

@@ -179,6 +179,19 @@ class HomeService extends Service {
     ];
     return result;
   }
+
+  async search(keyword, page) {
+    const lowerKeyword = keyword.toLowerCase();
+    const result = await getMainData(page, function(post) {
+      return post.title.toLowerCase().indexOf(lowerKeyword) >= 0 ||
+      post.content.toLowerCase().indexOf(lowerKeyword) >= 0;
+    });
+    result.navs = [
+      { name: 'Home', url: '/' },
+      { name: keyword, url: '' },
+    ];
+    return result;
+  }
 }
 
 module.exports = HomeService;

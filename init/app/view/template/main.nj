@@ -49,7 +49,7 @@
       <div class="item">
         <div class="ui transparent inverted icon input">
           <i class="search icon"></i>
-          <input type="text" placeholder="Search">
+          <input id="search" type="text" placeholder="Search">
         </div>
       </div>
       <a class="item">登录</a>
