@@ -2,7 +2,7 @@
 
 $('.post.card .content').on('click', function() {
   const href = $(this).attr('href');
-  if (href) {
+  if (href && href !== 'undefined') {
     window.location.href = href;
   }
 });
