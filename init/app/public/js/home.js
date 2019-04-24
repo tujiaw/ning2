@@ -1,7 +1,10 @@
 'use strict';
 
 $('.post.card .content').on('click', function() {
-  window.location.href = $(this).attr('href');
+  const href = $(this).attr('href');
+  if (href) {
+    window.location.href = href;
+  }
 });
 
 $('.ui.button').on('click', function() {
