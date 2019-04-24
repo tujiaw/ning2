@@ -58,3 +58,11 @@ a.posttags:hover {
     background-color: #e2e2e2;
     color: #777;
 }
+
+.profile .item .name {
+  text-align: center;
+}
+
+.profile .item .num {
+  text-align: center;
+}
