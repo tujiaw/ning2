@@ -5,14 +5,14 @@
     {% for item in joke.list %}
       <div class="item">
         {% if loop.first and navs and navs.length %}
-          <div class="ui breadcrumb">
+          <div class="ui breadcrumb" style="margin-bottom:0.5em;">
               {% for nav in navs %}
-              {% if loop.last %}
-              <div class="section active">{{ nav.name }}</div>
-              {% else %}
-              <a class="section" href={{ nav.url }}>{{ nav.name }}</a>
-              <div class="divider"> / </div>
-              {% endif %}
+                {% if loop.last %}
+                <div class="section active">{{ nav.name }}</div>
+                {% else %}
+                <a class="section" href={{ nav.url }}>{{ nav.name }}</a>
+                <div class="divider"> / </div>
+                {% endif %}
               {% endfor %}
           </div>
         {% endif %}

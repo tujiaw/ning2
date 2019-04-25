@@ -19,3 +19,9 @@
     margin-left: 5px;
     margin-bottom: 2px;
 }
+
+footer.reference {
+  margin-top: 15px;
+  font-size: 11px;
+  color: #cc0000;
+}

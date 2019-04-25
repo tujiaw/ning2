@@ -79,7 +79,8 @@
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
   }
   $.ajaxSetup({
-    beforeSend: (xhr, settings) => {
+    // eslint-disable-next-line object-shorthand
+    beforeSend: function(xhr, settings) {
       if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
         xhr.setRequestHeader('x-csrf-token', csrftoken);
       }

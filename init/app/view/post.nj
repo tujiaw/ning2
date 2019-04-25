@@ -30,6 +30,23 @@
         {% endif %}
         {{ post.content | safe }}
     </div>
+    <footer class="reference">
+      <strong>（转载本站文章请注明作者和出处：<a href="https://ningto.com">泞途 - ningto.com</a>）</strong>
+    </footer>
+</div>
+<div class="ui buttons center aligned container">
+  {% if prevPost %}
+    <button class="ui labeled icon button" href="/post/{{ prevPost._id }}">
+      <i class="left arrow icon"></i>
+      {{ prevPost.title }}
+    </button>
+  {% endif %}
+  {% if nextPost %}
+    <button class="ui right labeled icon button" href="/post/{{ nextPost._id }}">
+      <i class="right arrow icon"></i>
+      {{ nextPost.title }}
+    </button>
+  {% endif %}
 </div>
 {% include "template/comments.nj" %}
 {% endblock %}
