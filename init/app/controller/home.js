@@ -53,6 +53,13 @@ class HomeController extends Controller {
       ctx.redirect('/');
     }
   }
+
+  async textjoke() {
+    const { ctx } = this;
+    const totalCount = this.config.joke.textJokeTotalCount;
+    const data = await ctx.service.home.textjoke(ctx.query.page, ctx.query.count, totalCount);
+    await render(this, 'textjoke.nj', data);
+  }
 }
 
 module.exports = HomeController;

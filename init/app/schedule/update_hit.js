@@ -9,8 +9,8 @@ module.exports = {
     type: 'all',
   },
   async task(ctx) {
-    console.log('start job update hit');
+    ctx.logger.info('start job update hit');
     ctx.app.config.midhit = Object.assign(ctx.app.config.midhit, await SearchKey.hit());
-    console.log('update counter', JSON.stringify(ctx.app.config.midhit));
+    ctx.logger.info('update counter', JSON.stringify(ctx.app.config.midhit));
   },
 };

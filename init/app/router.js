@@ -10,6 +10,7 @@ module.exports = app => {
   router.get('/tags/:name', controller.home.tag);
   router.get('/ym/:ym', controller.home.ym);
   router.get('/search', controller.home.search);
+  router.get('/textjoke', controller.home.textjoke);
   router.post('/comments/add', controller.comments.add);
   router.post('/comments/remove', controller.comments.remove);
 };

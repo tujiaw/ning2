@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="/public/css/github-markdown.min.css">
 <link rel="stylesheet" href="/public/css/post.css">
 {% endblock %}
-
 {% block body_content %}
 <div class="ui segment">
     <h2 class="ui header">{{ post.title }}</h2>

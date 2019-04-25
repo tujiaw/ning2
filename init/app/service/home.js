@@ -3,34 +3,11 @@
 const Service = require('egg').Service;
 const PostsModel = require('../model/posts');
 const CommentsModel = require('../model/comments');
+const { TextJoke } = require('../model/joke');
 const MongoHelp = require('../model/mongo').mongoHelp;
 const moment = require('moment');
 const objectIdToTimestamp = require('objectid-to-timestamp');
-
-function getRandomItems(arr, num) {
-  // 新建一个数组,将传入的数组复制过来,用于运算,而不要直接操作传入的数组;
-  const temp_array = [];
-  for (const index in arr) {
-    temp_array.push(arr[index]);
-  }
-  // 取出的数值项,保存在此数组
-  const return_array = [];
-  for (let i = 0; i < num; i++) {
-    // 判断如果数组还有可以取出的元素,以防下标越界
-    if (temp_array.length > 0) {
-      // 在数组中产生一个随机索引
-      const arrIndex = Math.floor(Math.random() * temp_array.length);
-      // 将此随机索引的对应的数组元素值复制出来
-      return_array[i] = temp_array[arrIndex];
-      // 然后删掉此索引的数组元素,这时候temp_array变为新的数组
-      temp_array.splice(arrIndex, 1);
-    } else {
-      // 数组中数据项取完后,退出循环,比如数组本来只有10项,但要求取出20项.
-      break;
-    }
-  }
-  return return_array;
-}
+const { getRandom, getRandomItems } = require('../extend/util');
 
 async function getMainData(page, filter) {
   const startTime = new Date().getTime();
@@ -91,8 +68,8 @@ async function getMainData(page, filter) {
   const right = {};
   right.profile = {
     postCount: totalCount,
-    totalhit: 235462,
-    todayhit: 340,
+    totalhit: 0,
+    todayhit: 0,
   };
   // 热搜
   right.hotPosts = allPosts.sort((a, b) => (b.pv - a.pv));
@@ -190,6 +167,34 @@ class HomeService extends Service {
       { name: 'Home', url: '/' },
       { name: keyword, url: '' },
     ];
+    return result;
+  }
+
+  async textjoke(page, count, totalCount) {
+    page = page || 1;
+    count = count || 20;
+    totalCount = totalCount || 100;
+    const PAGE_PREFIX = '/textjoke?page=';
+    const totalPage = totalCount / count;
+
+    const prevPage = Math.max(1, parseInt(page) - 1);
+    const nextPage = Math.min(totalPage, parseInt(page) + 1);
+    const randomPage = Math.max(1, getRandom(1, totalPage));
+    const list = await TextJoke.get(page, count);
+
+    const result = await getMainData(page, function() { return false; });
+    result.navs = [
+      { name: 'Home', url: '/' },
+      { name: '文本笑话', url: '' },
+    ];
+    result.joke = {
+      page,
+      count,
+      list,
+      prevPage: PAGE_PREFIX + prevPage,
+      nextPage: PAGE_PREFIX + nextPage,
+      randomPage: PAGE_PREFIX + randomPage,
+    };
     return result;
   }
 }

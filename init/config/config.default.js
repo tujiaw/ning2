@@ -24,6 +24,7 @@ module.exports = appInfo => {
   // add your middleware config here
   config.middleware = [ 'midhit' ];
   config.midhit = { totalhit: 0, todayhit: 0 };
+  config.joke = { textJokeTotalCount: 0 };
 
   // add your user config here
   const userConfig = {

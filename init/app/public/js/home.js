@@ -68,10 +68,23 @@ function gotoPage(page) {
   window.location.href = first + '?' + params;
 }
 
+function go(self) {
+  if (self.attr('page')) {
+    gotoPage(self.attr('page'));
+  } else {
+    window.location.href = self.attr('href');
+  }
+}
+
 $('button#prevPage').on('click', function() {
-  gotoPage($(this).attr('page'));
+  go($(this));
 });
 
 $('button#nextPage').on('click', function() {
-  gotoPage($(this).attr('page'));
+  go($(this));
 });
+
+$('button#randomPage').on('click', function() {
+  go($(this));
+});
+
