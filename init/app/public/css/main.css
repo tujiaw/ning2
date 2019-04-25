@@ -38,6 +38,7 @@ body {
     z-index: 20;
     background-color: #fff;
     border-radius: 12px 0 0 12px;
+    display: none;
 }
 
 a.posttags {

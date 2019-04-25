@@ -76,15 +76,6 @@ function go(self) {
   }
 }
 
-$('button#prevPage').on('click', function() {
+$('.alink').on('click', function() {
   go($(this));
 });
-
-$('button#nextPage').on('click', function() {
-  go($(this));
-});
-
-$('button#randomPage').on('click', function() {
-  go($(this));
-});
-

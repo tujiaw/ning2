@@ -43,11 +43,11 @@
     </div>
     {% endfor %}
     <div class="ui buttons center aligned container">
-        <button id="prevPage" class="ui labeled icon button {% if pageTurn.prev === 0 %}disabled{% endif %}" page={{ pageTurn.prev }}>
+        <button class="alink ui labeled icon button {% if pageTurn.prev === 0 %}disabled{% endif %}" page={{ pageTurn.prev }}>
             <i class="left chevron icon"></i>
             上一页
         </button>
-        <button id="nextPage" class="ui right labeled icon button {% if pageTurn.next === 0 %}disabled{% endif %}" page={{ pageTurn.next }}>
+        <button class="alink ui right labeled icon button {% if pageTurn.next === 0 %}disabled{% endif %}" page={{ pageTurn.next }}>
             下一页
             <i class="right chevron icon"></i>
         </button>

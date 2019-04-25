@@ -26,14 +26,14 @@
   </div>
 </div>
 <div class="ui buttons center aligned container">
-  <button id="prevPage" class="ui labeled icon button" href={{ joke.prevPage }}>
+  <button class="alink ui labeled icon button" href={{ joke.prevPage }}>
     <i class="left chevron icon"></i>
     上一页
   </button>
-  <button id="randomPage" class="ui button" href={{ joke.randomPage }}>
+  <button class="alink ui button" href={{ joke.randomPage }}>
     随便看看
   </button>
-  <button id="nextPage" class="ui right labeled icon button" href={{ joke.nextPage }}>
+  <button class="alink ui right labeled icon button" href={{ joke.nextPage }}>
     下一页
     <i class="right chevron icon"></i>
   </button>
