@@ -5,6 +5,17 @@
  */
 module.exports = app => {
   const { router, controller } = app;
+  // app.passport.mount('github');
+  // app.passport.verify(async (ctx, user) => {
+  //   console.log('aaaaaaaaaaaa')
+  //   const auth = await ctx.model.Authorization.findOne({
+  //     uid: user.id,
+  //     provider: user.provider,
+  //   });
+  //   console.log(JSON.stringify(auth))
+  //   return user;
+  // })
+  
   router.get('/', controller.home.index);
   router.get('/post/:id', controller.home.post);
   router.get('/tags/:name', controller.home.tag);
