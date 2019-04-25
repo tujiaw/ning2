@@ -33,3 +33,6 @@
 </div>
 {% include "template/comments.nj" %}
 {% endblock %}
+{% block body_script %}
+<script type="text/javascript" src="/public/js/comment.js"></script>
+{% endblock %}
