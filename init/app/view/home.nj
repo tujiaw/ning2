@@ -6,7 +6,7 @@
 {% block body_content %}
 <div class="ui link one cards">
     {% for post in posts %}
-    <div class="post card">
+    <div class="post card" style="margin-bottom:0.1em;">
         {% if loop.first and navs and navs.length %}
         <div class="ui breadcrumb" style="margin:1em;">
             {% for nav in navs %}
@@ -33,7 +33,7 @@
         </div>
         <div class="extra content">
             <span class="right floated">
-                {{ post.created_at }}
+                {{ post.from_now }}
             </span>
             <span>
                 <i class="user icon"></i>

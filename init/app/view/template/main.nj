@@ -51,7 +51,7 @@
           <input id="search" type="text" placeholder="Search">
         </div>
       </div>
-      <a class="item">登录</a>
+      <a class="item" href="/login">登录</a>
     </div>
   </div>
 </div>

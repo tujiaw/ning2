@@ -6,46 +6,46 @@
 {% endblock %}
 {% block body_content %}
 <div class="ui segment">
-    <h2 class="ui header">{{ post.title }}</h2>
-    <div class="ui meta">
-        <i class="tags icon"></i>
-        {% for tag in post.tags %}
-        {% if tag.length > 0 %}
-        <a href="/tags/{{ tag }}" class="posttags"> {{ tag }}</a>&nbsp;
-        {% endif %}
-        {% endfor %}
-        &nbsp;<span><i class="user icon"></i>阅读({{ post.pv }})</span>
-        &nbsp;<span><i class="calendar icon"></i>{{ post.created_at }}</span>
+  <h2 class="ui header">{{ post.title }}</h2>
+  <div class="ui meta">
+    <i class="tags icon"></i>
+    {% for tag in post.tags %}
+    {% if tag.length > 0 %}
+    <a href="/tags/{{ tag }}" class="posttags"> {{ tag }}</a>&nbsp;
+    {% endif %}
+    {% endfor %}
+    &nbsp;<span><i class="user icon"></i>阅读({{ post.pv }})</span>
+    &nbsp;<span><i class="calendar icon"></i>{{ post.created_at }}</span>
+  </div>
+  </br>
+  <div class="markdown-body">
+    {% if post.toc %}
+    <div id="toc">
+      <div id="toc-head">
+        <span>文章目录</span>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </div>
+      {{ post.toc | safe }}
     </div>
-    </br>
-    <div class="markdown-body">
-        {% if post.toc %}
-        <div id="toc">
-            <div id="toc-head">
-                <span>文章目录</span>
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </div>
-            {{ post.toc | safe }}
-        </div>
-        {% endif %}
-        {{ post.content | safe }}
-    </div>
-    <footer class="reference">
-      <strong>（转载本站文章请注明作者和出处：<a href="https://ningto.com">泞途 - ningto.com</a>）</strong>
-    </footer>
+    {% endif %}
+    {{ post.content | safe }}
+  </div>
+  <footer class="reference">
+    <strong>（转载本站文章请注明作者和出处：<a href="https://ningto.com">泞途 - ningto.com</a>）</strong>
+  </footer>
 </div>
 <div class="ui buttons center aligned container">
   {% if prevPost %}
-    <button class="ui labeled icon button" href="/post/{{ prevPost._id }}">
-      <i class="left arrow icon"></i>
-      {{ prevPost.title }}
-    </button>
+  <button class="ui labeled icon button" href="/post/{{ prevPost._id }}">
+    <i class="left arrow icon"></i>
+    {{ prevPost.title }}
+  </button>
   {% endif %}
   {% if nextPost %}
-    <button class="ui right labeled icon button" href="/post/{{ nextPost._id }}">
-      <i class="right arrow icon"></i>
-      {{ nextPost.title }}
-    </button>
+  <button class="ui right labeled icon button" href="/post/{{ nextPost._id }}">
+    <i class="right arrow icon"></i>
+    {{ nextPost.title }}
+  </button>
   {% endif %}
 </div>
 {% include "template/comments.nj" %}

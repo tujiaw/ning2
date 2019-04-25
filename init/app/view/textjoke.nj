@@ -5,7 +5,7 @@
     {% for item in joke.list %}
       <div class="item">
         {% if loop.first and navs and navs.length %}
-          <div class="ui breadcrumb" style="margin-bottom:0.5em;">
+          <div class="ui breadcrumb">
               {% for nav in navs %}
                 {% if loop.last %}
                 <div class="section active">{{ nav.name }}</div>
@@ -15,6 +15,7 @@
                 {% endif %}
               {% endfor %}
           </div>
+          <div class="ui divider"></div>
         {% endif %}
         <div class="item">
           <div class="header" style="color:rgba(0, 0, 0, 0.7);margin:0.5em;">{{ item.title }}</div>

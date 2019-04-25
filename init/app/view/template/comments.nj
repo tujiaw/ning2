@@ -12,8 +12,8 @@
           {{ comment.content }}
         </div>
         <div class="actions">
-          <a id="reply">回复</a>
-          <a id="delete">删除</a>
+          <a id="reply"><i class="icon reply"></i></a>
+          <a id="delete"><i class="icon trash"></i></a>
         </div>
       </div>
     </div>

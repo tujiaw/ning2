@@ -9,13 +9,16 @@ var moment = require('moment');
 var objectIdToTimestamp = require('objectid-to-timestamp');
 var renderer = new marked.Renderer();
 
+// 设置中文语言时间格式
+moment.locale('zh-cn');
+
 const option = {
   reconnectTries: Number.MAX_VALUE,
   reconnectInterval: 3000,
   useNewUrlParser: true,
   // user: 'tujiaw',
   // pass: 'fighting'
-}
+};
 
 mongoose.blogConn = mongoose.createConnection(config.blogUri, option);
 //mongoose.poetryConn = mongoose.createConnection(config.poetryUri, option);
@@ -93,6 +96,7 @@ module.exports.mongoHelp = {
   addOneCreateAt: function(result) {
     if (result) {
       result.created_at = moment(objectIdToTimestamp(result._id)).format('YYYY-MM-DD HH:mm');
+      result.from_now = moment(objectIdToTimestamp(result._id)).fromNow();
     }
   },
   addAllCreateDateTime: function(results) {
