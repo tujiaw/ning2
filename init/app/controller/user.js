@@ -6,9 +6,10 @@ class UserController extends Controller {
   async login() {
     const { ctx } = this;
     if (ctx.method === 'GET') {
+      ctx.session.returnTo = ctx.get('referer') || '/';
       await ctx.render('login.nj');
     } else {
-      // const data = await ctx.service.user.login(name, password);
+      ctx.body = 'login failed!';
     }
   }
 
@@ -18,9 +19,13 @@ class UserController extends Controller {
     ctx.redirect(ctx.get('referer') || '/');
   }
 
-  async githubLogin() {
+  async loginCallback() {
     const { ctx } = this;
-    ctx.redirect('https://github.com/login/oauth/authorize?client_id=531ad8e4517595748d97&state=123456789')
+    if (ctx.user.errmsg) {
+      await ctx.render('login.nj', ctx.user);
+    } else {
+      ctx.redirect(ctx.session.returnTo);
+    }
   }
 }
 

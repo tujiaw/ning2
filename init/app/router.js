@@ -25,15 +25,18 @@ module.exports = app => {
     if (user) {
       if (user.provider === 'local') {
         const data = await UsersSchema.getUserByProviderLogin(user.provider, user.username);
-        if (data && data.password === sha1(user.password)) {
-          return data;
+        if (data) {
+          if (data.password === sha1(user.password)) {
+            return data;
+          }
+          return { errmsg: '登录失败，密码不正确！' };
         }
-      } else {
-        user.login = user.name;
-        return user;
+        return { errmsg: '登录失败，用户不存在！' };
       }
+      user.login = user.name;
+      return user;
     }
-    return {};
+    return { errmsg: '登录失败，鉴权失败！' };
   });
   app.passport.serializeUser(async (ctx, user) => { return encodeBase64(JSON.stringify(user)); });
   app.passport.deserializeUser(async (ctx, user) => { return JSON.parse(decodeBase64(user)); });
@@ -48,8 +51,8 @@ module.exports = app => {
   router.get('/captcha', controller.home.captcha);
   router.get('/login', controller.user.login);
   router.get('/logout', controller.user.logout);
-  router.get('/githublogin', controller.user.githubLogin);
-  router.post('/login', app.passport.authenticate('local', { successRedirect: '/' }));
+  router.get('/login/callback', controller.user.loginCallback);
+  router.post('/login', app.passport.authenticate('local', { successRedirect: '/login/callback' }));
   router.post('/comments/add', controller.comments.add);
   router.post('/comments/remove', controller.comments.remove);
 };
