@@ -92,7 +92,7 @@
       </form>
 
       <div class="ui message">
-        第三方登录 <a href="/githublogin">github</a>
+        第三方登录 <a href="/passport/github">github</a>
         <a href="/"> | 主页</a>
       </div>
     </div>
