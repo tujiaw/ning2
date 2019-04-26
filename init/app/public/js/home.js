@@ -79,3 +79,13 @@ function go(self) {
 $('.alink').on('click', function() {
   go($(this));
 });
+
+$('a.postDelete').on('click', function() {
+  const url = $(this).attr('url');
+  $('.ui.mini.modal').modal({
+    onApprove: function() {
+      window.location.href = url;
+    }
+  }).modal('show');
+  return false;
+})

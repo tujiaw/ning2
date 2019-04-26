@@ -30,7 +30,7 @@
                 {% endfor %}
                 {% if user and user._id and user._id.toString() === post.author.toString() %}
                   <a href="/edit/{{ post.id }}"><i class="edit icon"></i></a>&nbsp;
-                  <a href="/delete/{{ post.id }}"><i class="trash icon"></i></a>&nbsp;
+                  <a class="postDelete" href="javascript:void(0)" url="/delete/{{ post.id }}"><i class="trash icon"></i></a>&nbsp;
                 {% endif %}
             </div>
             <div class="description">{{ post.content }}</div>
