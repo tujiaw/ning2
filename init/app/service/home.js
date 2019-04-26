@@ -197,6 +197,14 @@ class HomeService extends Service {
     };
     return result;
   }
+
+  async delete(postId, authorId) {
+    try {
+      await PostsModel.delPostById(postId, authorId);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 module.exports = HomeService;

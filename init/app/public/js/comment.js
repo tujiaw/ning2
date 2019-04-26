@@ -117,5 +117,6 @@
       }, 300);
     }
   });
+// eslint-disable-next-line no-undef
 })(sha1);
 

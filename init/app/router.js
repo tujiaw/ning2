@@ -44,6 +44,9 @@ module.exports = app => {
   // 路由
   router.get('/', controller.home.index);
   router.get('/post/:id', controller.home.post);
+  router.get('/edit/:id', controller.home.edit);
+  router.post('/edit/:id', controller.home.edit);
+  router.get('/delete/:id', controller.home.delete);
   router.get('/tags/:name', controller.home.tag);
   router.get('/ym/:ym', controller.home.ym);
   router.get('/search', controller.home.search);

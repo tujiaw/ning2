@@ -27,8 +27,8 @@ module.exports = appInfo => {
   config.joke = { textJokeTotalCount: 0 };
   config.passportGithub = {
     key: 'b6567207454fe7fe27d4',
-    secret: '00889016698c5994c76e0e23e89687fc27d2c426'
-  }
+    secret: '00889016698c5994c76e0e23e89687fc27d2c426',
+  };
 
   // add your user config here
   const userConfig = {

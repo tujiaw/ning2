@@ -60,4 +60,4 @@ exports.getRandomItems = function(arr, num) {
     }
   }
   return return_array;
-}
+};

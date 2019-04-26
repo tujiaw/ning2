@@ -7,7 +7,6 @@
     "declarations": true
   },
   "dependencies": {
-    "axios": "^0.18.0",
     "bluebird": "^3.5.0",
     "egg": "^2.15.1",
     "egg-passport": "^2.0.1",
@@ -38,8 +37,8 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-ning2",
-    "stop": "egg-scripts stop --title=egg-server-ning2",
+    "start": "egg-scripts start --daemon --title=ning2",
+    "stop": "egg-scripts stop --title=ning2",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",

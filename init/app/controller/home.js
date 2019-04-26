@@ -70,6 +70,26 @@ class HomeController extends Controller {
     data.text = sha1(data.text.toLowerCase());
     ctx.body = data;
   }
+
+  async edit() {
+
+  }
+
+  async delete() {
+    const { ctx } = this;
+    if (!(ctx.user && ctx.user._id)) {
+      ctx.redirect('/login');
+      return;
+    }
+
+    if (!ctx.params.id) {
+      ctx.body = '参数错误';
+      return;
+    }
+
+    await ctx.service.home.delete(ctx.params.id, ctx.user._id);
+    ctx.redirect('/');
+  }
 }
 
 module.exports = HomeController;
