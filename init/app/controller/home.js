@@ -6,6 +6,7 @@ const sha1 = require('sha1');
 
 async function render(self, view, data) {
   data.right.profile = Object.assign(data.right.profile, self.config.midhit);
+  data.user = self.ctx.user;
   return await self.ctx.render(view, data);
 }
 

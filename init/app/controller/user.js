@@ -12,6 +12,12 @@ class UserController extends Controller {
     }
   }
 
+  async logout() {
+    const { ctx } = this;
+    ctx.logout();
+    ctx.redirect(ctx.get('referer') || '/');
+  }
+
   async githubLogin() {
     const { ctx } = this;
     ctx.redirect('https://github.com/login/oauth/authorize?client_id=531ad8e4517595748d97&state=123456789')

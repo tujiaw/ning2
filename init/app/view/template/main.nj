@@ -47,7 +47,17 @@
           <input id="search" type="text" placeholder="Search">
         </div>
       </div>
-      <a class="item" href="/login">登录</a>
+      {% if user.login and user.login.length %}
+        <div class="ui dropdown item">
+          {{ user.login }}
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item alink" href="/logout">登出</div>
+          </div>
+        </div>
+      {% else %}
+        <a class="item" href="/login">登录</a>
+      {% endif %}
     </div>
   </div>
 </div>
