@@ -11,6 +11,7 @@ module.exports = app => {
   router.get('/ym/:ym', controller.home.ym);
   router.get('/search', controller.home.search);
   router.get('/textjoke', controller.home.textjoke);
+  router.get('/captcha', controller.home.captcha);
   router.get('/login', controller.user.login);
   router.get('/githublogin', controller.user.githubLogin);
   router.post('/comments/add', controller.comments.add);

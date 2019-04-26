@@ -1,6 +1,4 @@
 'use strict';
 
-const a = 'a';
-if (parseInt(a)) {
-  console.log('aaa');
-}
+const sha1 = require('sha1')
+console.log(sha1('sxsj'));

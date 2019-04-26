@@ -1,6 +1,6 @@
 'use strict';
 
-(function comments() {
+(function comments(sha1) {
   const $body = (window.opera) ? (document.compatMode === 'CSS1Compat' ? $('html') : $('body')) : $('html,body'); // 这行是 Opera 的补丁, 少了它 Opera 是直接用跳的而且画面闪烁
   $(document).ready(function() {
     const gotoid = getCookie('goto_id');
@@ -35,7 +35,7 @@
   const refreshCaptcha = function() {
     $.ajax({
       type: 'GET',
-      url: 'https://ningto.com/captcha',
+      url: '/captcha',
       success: result => {
         if (result.data) {
           $('#svgCaptcha').html(result.data);
@@ -59,9 +59,10 @@
     } else if (name.length < 1 || name.length > 64) {
       errMsg = '姓名不合法.';
     } else {
-      const inputCaptcha = $('#captcha').val();
+      const text = $('#captcha').val().toLowerCase();
+      const inputCaptcha = sha1.update(text).hex();
       const dstCaptcha = $('#svgCaptcha').attr('value');
-      if (inputCaptcha.length && inputCaptcha.toLowerCase() === dstCaptcha.toLowerCase()) {
+      if (inputCaptcha.length && inputCaptcha === dstCaptcha) {
         setCookie('goto_id', 'post_comments', 1);
         return true;
       }
@@ -116,4 +117,5 @@
       }, 300);
     }
   });
-})();
+})(sha1);
+

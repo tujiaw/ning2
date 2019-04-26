@@ -1,6 +1,8 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+const svgCaptcha = require('svg-captcha');
+const sha1 = require('sha1');
 
 async function render(self, view, data) {
   data.right.profile = Object.assign(data.right.profile, self.config.midhit);
@@ -59,6 +61,13 @@ class HomeController extends Controller {
     const totalCount = this.config.joke.textJokeTotalCount;
     const data = await ctx.service.home.textjoke(ctx.query.page, ctx.query.count, totalCount);
     await render(this, 'textjoke.nj', data);
+  }
+
+  async captcha() {
+    const { ctx } = this;
+    const data = svgCaptcha.create();
+    data.text = sha1(data.text.toLowerCase());
+    ctx.body = data;
   }
 }
 
