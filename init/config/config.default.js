@@ -29,10 +29,13 @@ module.exports = appInfo => {
     key: 'b6567207454fe7fe27d4',
     secret: '00889016698c5994c76e0e23e89687fc27d2c426',
   };
+  config.allTags = ['Windows', 'Linux', 'Android', 'IOS', 'Mac', 'Mobile', 'C/C++', 'Qt', 'Node.js', 'Java', 'Database', 
+  'Web', 'Tools', 'Bug', 'Life', 'Tips', 'Design', 'Javascript', 'MongoDB', 
+  'React', 'Product'];
 
   // add your user config here
   const userConfig = {
-    // myAppName: 'egg',
+    // myAppName: 'ning2',
   };
 
   return {

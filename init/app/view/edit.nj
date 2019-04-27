@@ -1,0 +1,43 @@
+{% extends "template/main.nj" %}
+{% block body_content %}
+<div class="ui segment">
+<div class="ui form" action="/edit/{{ post._id }}" method="POST" role="form">
+  <div class="field">
+    <div class="field">
+      <label>文章标题</label>
+      <div style="display:flex;">
+        <input type="text" name="title" value="{{ post.title }}">
+        <div style="margin:5px;"></div>
+        <select class="ui dropdown" style="width:80px;">
+          <option value="">原创</option>
+          <option value="1">转载</option>
+          <option value="2">翻译</option>
+        </select>
+      </div>
+    </div>
+    <label>文章内容</label>
+    <textarea name="content" rows="18">{{ post.content }}</textarea>
+  </div>
+  <div class="field">
+    <label>文章类别</label>
+    {% for tag in allTags %}
+      {% set checked = '' %}
+      {% for selectTag in post.tags %}
+        {% if checked === '' and tag === selectTag %}
+          {% set checked = 'checked' %}
+        {% endif %}
+      {% endfor %}
+      <div class="ui checked checkbox">
+        <input type="checkbox" {{ checked }}>
+        <label>{{ tag }}</label>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="field">
+    <button type="submit" class="ui positive right labeled icon button">
+    提交<i class="checkmark icon"></i>
+    </button>
+  </div>
+</div>
+</div>
+{% endblock %}

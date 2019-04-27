@@ -10,7 +10,7 @@
                 {% if loop.last %}
                 <div class="section active">{{ nav.name }}</div>
                 {% else %}
-                <a class="section" href={{ nav.url }}>{{ nav.name }}</a>
+                <a class="section" href="{{ nav.url }}">{{ nav.name }}</a>
                 <div class="divider"> / </div>
                 {% endif %}
               {% endfor %}
@@ -26,14 +26,14 @@
   </div>
 </div>
 <div class="ui buttons center aligned container">
-  <button class="alink ui labeled icon button" href={{ joke.prevPage }}>
+  <button class="alink ui labeled icon button" href="{{ joke.prevPage }}">
     <i class="left chevron icon"></i>
     上一页
   </button>
-  <button class="alink ui button" href={{ joke.randomPage }}>
+  <button class="alink ui button" href="{{ joke.randomPage }}">
     随便看看
   </button>
-  <button class="alink ui right labeled icon button" href={{ joke.nextPage }}>
+  <button class="alink ui right labeled icon button" href="{{ joke.nextPage }}">
     下一页
     <i class="right chevron icon"></i>
   </button>

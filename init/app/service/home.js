@@ -255,6 +255,16 @@ class HomeService extends Service {
     ]
     return result;
   }
+
+  async edit(id) {
+    const result = await getMainData(1, function() { return false; });
+    try {
+      result.post = await PostsModel.getPostById(id);
+    } catch (err) {
+      console.log(err);
+    }
+    return result;
+  }
 }
 
 module.exports = HomeService;

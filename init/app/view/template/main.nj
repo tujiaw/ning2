@@ -107,7 +107,7 @@
         <div class="three wide column">
           <h4 class="ui inverted header">博客</h4>
           <div class="ui inverted link list">
-            <a href="https://blog.csdn.net/" class="item">csdn</a>
+            <a href="https://blog.csdn.net/" class="item">CSDN</a>
             <a href="https://www.cnblogs.com/" class="item">cnblogs</a>
             <a href="http://blog.chinaunix.net/" class="item">ChinaUnix</a>
             <a href="http://blog.jobbole.com/" class="item">JobBole</a>

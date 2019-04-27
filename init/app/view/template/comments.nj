@@ -2,7 +2,7 @@
   <div id="post_comments" class="ui minimal comments">
     <h3 class="ui dividing header">文章评论</h3>
     {% for comment in comments %}
-    <div class="comment" id={{ comment.id }}>
+    <div class="comment" id="{{ comment.id }}">
       <div class="content">
         <a class="author">{{ comment.name }}</a>
         <div class="metadata">

@@ -71,10 +71,6 @@ class HomeController extends Controller {
     ctx.body = data;
   }
 
-  async edit() {
-
-  }
-
   async delete() {
     const { ctx } = this;
     if (!(ctx.user && ctx.user._id)) {
@@ -95,6 +91,33 @@ class HomeController extends Controller {
     const { ctx } = this;
     const data = await ctx.service.home.works();
     await render(this, 'works.nj', data);
+  }
+
+  async edit() {
+    const { ctx } = this;
+    if (!(ctx.user && ctx.user._id)) {
+      ctx.redirect('/login');
+      return;
+    }
+
+    if (!ctx.params.id) {
+      ctx.body = '参数错误';
+      return;
+    }
+
+    if (ctx.method === 'GET') {
+      const data = await ctx.service.home.edit(ctx.params.id);
+      console.log(data.post)
+      if (data.post) {
+        data.allTags = this.config.allTags;
+        await render(this, 'edit.nj', data);
+      } else {
+        ctx.redirect('/');
+      }
+    } else if (ctx.method === 'POST') {
+      console.log('ddddddddddddd')
+    }
+    
   }
 }
 
