@@ -16,6 +16,10 @@
     {% endfor %}
     &nbsp;<span><i class="user icon"></i>阅读({{ post.pv }})</span>
     &nbsp;<span><i class="calendar icon"></i>{{ post.created_at }}</span>
+    {% if user and user._id and user._id.toString() === post.author.toString() %}
+      &nbsp;&nbsp;<a href="/edit/{{ post.id }}" style="color:#000;"><i class="edit icon"></i></a>&nbsp;
+      <a class="postDelete" style="color:#000;" href="javascript:void(0)" url="/delete/{{ post.id }}"><i class="trash icon"></i></a>&nbsp;
+    {% endif %}
   </div>
   </br>
   <div class="markdown-body">
