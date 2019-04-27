@@ -107,7 +107,6 @@ class HomeController extends Controller {
 
     if (ctx.method === 'GET') {
       const data = await ctx.service.home.edit(ctx.params.id);
-      console.log(data.post)
       if (data.post) {
         data.allTags = this.config.allTags;
         await render(this, 'edit.nj', data);
@@ -115,8 +114,15 @@ class HomeController extends Controller {
         ctx.redirect('/');
       }
     } else if (ctx.method === 'POST') {
-      console.log('dddddddd');
-      console.log(ctx.request.body);
+      const { body } = ctx.request;
+      const data = {
+        title: body.title,
+        content: body.content,
+        type: body.type || '原',
+        tags: body.tags.split(',')
+      }
+      await ctx.service.home.savePost(body._id, ctx.user._id, data);
+      ctx.redirect('/post/' + body._id);
     }
     
   }

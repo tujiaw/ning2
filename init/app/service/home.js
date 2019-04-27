@@ -266,6 +266,14 @@ class HomeService extends Service {
     }
     return result;
   }
+
+  async savePost(id, author, data) {
+    try {
+      await PostsModel.updatePostById(id, author, data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 module.exports = HomeService;

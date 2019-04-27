@@ -2,6 +2,9 @@
 {% block body_content %}
 <div class="ui segment">
   <form class="ui edit form" action="/edit/{{ post._id }}" method="post" role="form">
+  <input id="_id" type="text" name="_id" style="display:none;" value="{{ post._id }}">
+  <input id="type" type="text" name="type" style="display:none;" value="{{ post.type }}">
+  <input id="selectedTag" type="text" name="tags" style="display:none;" value="{{ post.tags }}">
     <div class="field">
       <div class="field">
         <label>文章标题</label>
@@ -9,10 +12,9 @@
           <input type="text" name="title" value="{{ post.title }}">
           <div style="margin:5px;"></div>
           <select class="ui dropdown">
-            <option value="原">原创</option>
-            <option value="转">转载</option>
-            <option value="译">翻译</option>
-            <input id="type" type="text" name="type" style="display:none;" value="{{ post.type }}">
+            <option value="原" {% if post.type === '原'%}selected{% endif %}>原创</option>
+            <option value="转" {% if post.type === '转'%}selected{% endif %}>转载</option>
+            <option value="译" {% if post.type === '译'%}selected{% endif %}>翻译</option>
           </select>
         </div>
       </div>
@@ -21,9 +23,8 @@
     </div>
     <div class="field">
       <label>文章类别</label>
-      <input id="selectedTag" type="text" name="tags" style="display:none;" value="{{ post.tags }}">
       {% for tag in allTags %}
-      <div class="ui itemTag checked checkbox">
+      <div class="ui itemTag checked checkbox" style="margin-right:10px;">
         <input type="checkbox">
         <label>{{ tag }}</label>
       </div>
