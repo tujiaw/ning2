@@ -1,0 +1,28 @@
+{% extends "template/main.nj" %}
+{% block body_content %}
+<h3>小程序，仅供学习之用</h3>
+<div class="ui cards">
+  {% for work in works %}
+  <div class="card">
+    <div class="image">
+      <img src={{ work.img }}>
+    </div>
+    <div class="content">
+      <div class="header">{{ work.name }}</div>
+      <div class="meta">
+        <a>{{ work.desc }}</a>
+      </div>
+      <div class="description">{{ work.detail }}</div>
+    </div>
+    <div class="extra content">
+      <button class="ui icon button" href={{ work.source }}>
+        <i class="github icon"></i>
+      </button>
+      <button class="ui icon button" href={{ work.download }}>
+        <i class="linkify icon"></i>
+      </button>
+    </div>
+  </div>
+  {% endfor%}
+</div>
+{% endblock %}

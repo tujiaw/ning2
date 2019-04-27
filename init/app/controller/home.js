@@ -90,6 +90,12 @@ class HomeController extends Controller {
     await ctx.service.home.delete(ctx.params.id, ctx.user._id);
     ctx.redirect('/');
   }
+
+  async works() {
+    const { ctx } = this;
+    const data = await ctx.service.home.works();
+    await render(this, 'works.nj', data);
+  }
 }
 
 module.exports = HomeController;

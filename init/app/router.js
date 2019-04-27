@@ -55,6 +55,7 @@ module.exports = app => {
   router.get('/login', controller.user.login);
   router.get('/logout', controller.user.logout);
   router.get('/login/callback', controller.user.loginCallback);
+  router.get('/works', controller.home.works);
   router.post('/login', app.passport.authenticate('local', { successRedirect: '/login/callback' }));
   router.post('/comments/add', controller.comments.add);
   router.post('/comments/remove', controller.comments.remove);
