@@ -115,7 +115,8 @@ class HomeController extends Controller {
         ctx.redirect('/');
       }
     } else if (ctx.method === 'POST') {
-      console.log('ddddddddddddd')
+      console.log('dddddddd');
+      console.log(ctx.request.body);
     }
     
   }

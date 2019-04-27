@@ -260,6 +260,7 @@ class HomeService extends Service {
     const result = await getMainData(1, function() { return false; });
     try {
       result.post = await PostsModel.getPostById(id);
+      // result.post.tags = JSON.stringify(result.post.tags);
     } catch (err) {
       console.log(err);
     }
