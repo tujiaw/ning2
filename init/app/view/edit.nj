@@ -8,11 +8,11 @@
         <div style="display:flex;">
           <input type="text" name="title" value="{{ post.title }}">
           <div style="margin:5px;"></div>
-          <select class="ui dropdown" style="max-width:80px;">
-            <option value="" data="原">原创</option>
-            <option value="1" data="转">转载</option>
-            <option value="2" data="译">翻译</option>
-            <input id="type" type="text" name="type" style="display:none;">
+          <select class="ui dropdown">
+            <option value="原">原创</option>
+            <option value="转">转载</option>
+            <option value="译">翻译</option>
+            <input id="type" type="text" name="type" style="display:none;" value="{{ post.type }}">
           </select>
         </div>
       </div>

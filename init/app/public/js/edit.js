@@ -1,11 +1,11 @@
 (function($) {
-  // $('.edit select.dropdown').dropdown({
-  //   action: function(text, value) {
-  //     console.log(text, value);
-  //   }
-  // })
+  $('.edit select.dropdown').dropdown({
+    action: 'activate',
+    onChange: function(value) {
+      $('.edit #type').val(value);
+    }
+  });
 
-  $('.edit select.dropdown').select();
   let tagList = $('.edit #selectedTag').val().split(',');
   tagList = tagList.filter(a => a);
   $('.edit .itemTag').each(function() {
