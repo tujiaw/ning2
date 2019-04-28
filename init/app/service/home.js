@@ -207,7 +207,7 @@ class HomeService extends Service {
   }
 
   async works() {
-    const result =  await getMainData(1, function() { return false; });
+    const result = await getMainData(1, function() { return false; });
     result.works = [
       {
         img: 'https://www.ningto.com/program/shortcut/acc.png',
@@ -216,35 +216,40 @@ class HomeService extends Service {
         detail: '快速找到你要打开的应用程序。不用为了找到某个程序的启动图标而烦恼，不用在任务栏摆一堆的快捷方式，不用在茫茫桌面寻找文件。',
         source: 'https://github.com/tujiaw/Acc',
         download: 'https://www.ningto.com/program/download/Acc.exe'
-      },{
+      },
+      {
         img: 'https://www.ningto.com/program/shortcut/MonitorClipboard.png',
         name: 'Desktop Monitor',
         desc: 'Windows客户端',
         detail: '一个小巧的应用程序，用来监控剪切板、键盘和鼠标，能看到你近期的一些操作记录，不要用它来干坏事！',
         source: 'https://github.com/tujiaw/MonitorClipboard',
         download: 'https://www.ningto.com/program/download/MonitorClipboard.exe'
-      },{
+      },
+      {
         img: 'https://www.ningto.com/program/shortcut/joke.png',
         name: 'Joke',
         desc: 'React native Android App',
         detail: '集合了笑话大全、来福岛笑话、趣图，偶尔看一看放松一下，每天都有更新，笑话多多。',
         source: 'https://github.com/tujiaw/react_native_joke',
         download: 'https://www.ningto.com/program/download/joke.apk'
-      },{
+      },
+      {
         img: 'https://www.ningto.com/program/shortcut/wchathot.png',
         name: 'Wechat hot',
         desc: 'React web',
         detail: '微信文章精选有20个类别，里面有很多不错的文章。受到微信策略的影响一些老的文章链接打开后显示“链接已过期”。',
         source: 'https://github.com/tujiaw/react-wchathot',
         download: 'http://ningto.com/react-wchathot'
-      },{
+      },
+      {
         img: 'https://www.ningto.com/program/shortcut/dzdp.png',
         name: '模拟大众点评',
         desc: 'React web',
         detail: '学习react的时候写的，只是模拟了一小部分功能，使用了redux，react-router，mock数据使用了rapapi等技术。',
         source: 'https://github.com/tujiaw/react-dzdp',
         download: 'http://ningto.com/react-dzdp'
-      },{
+      },
+      {
         img: 'https://www.ningto.com/program/shortcut/color.png',
         name: '拾色器',
         desc: 'Windows客户端',
@@ -252,7 +257,7 @@ class HomeService extends Service {
         source: 'https://github.com/tujiaw/Color',
         download: 'https://www.ningto.com/program/download/color.zip'
       },
-    ]
+    ];
     return result;
   }
 
@@ -260,7 +265,6 @@ class HomeService extends Service {
     const result = await getMainData(1, function() { return false; });
     try {
       result.post = await PostsModel.getPostById(id);
-      // result.post.tags = JSON.stringify(result.post.tags);
     } catch (err) {
       console.log(err);
     }

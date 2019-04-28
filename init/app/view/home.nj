@@ -46,6 +46,7 @@
         </div>
     </div>
     {% endfor %}
+    <div class="divider">&nbsp;</div>
     <div class="ui buttons center aligned container">
         <button class="alink ui labeled icon button {% if pageTurn.prev === 0 %}disabled{% endif %}" page={{ pageTurn.prev }}>
             <i class="left chevron icon"></i>
