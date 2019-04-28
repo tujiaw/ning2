@@ -121,10 +121,41 @@ class HomeController extends Controller {
         type: body.type || '原',
         tags: body.tags.split(',')
       }
-      await ctx.service.home.savePost(body._id, ctx.user._id, data);
+      await ctx.service.home.updatePost(body._id, ctx.user._id, data);
       ctx.redirect('/post/' + body._id);
     }
-    
+  }
+
+  async write() {
+    // 优化在router里面鉴权
+    const { ctx } = this;
+    if (!(ctx.user && ctx.user._id)) {
+      ctx.redirect('/login');
+      return;
+    }
+
+    if (ctx.method === 'GET') {
+      const data = await ctx.service.home.write();
+      data.allTags = this.config.allTags;
+      await render(this, 'write.nj', data);
+    }
+    else if (ctx.method === 'POST') {
+      const { body } = ctx.request;
+      const data = {
+        author: ctx.user._id,
+        title: body.title,
+        content: body.content,
+        type: body.type || '原',
+        tags: body.tags.split(','),
+        pv: 1,
+      }
+      const newPost = await ctx.service.home.insertPost(data);
+      if (newPost) {
+        ctx.redirect('/post/' + newPost._id);
+      } else {
+        ctx.body = 'write post error!';
+      }
+    }
   }
 }
 

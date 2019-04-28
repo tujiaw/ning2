@@ -271,12 +271,20 @@ class HomeService extends Service {
     return result;
   }
 
-  async savePost(id, author, data) {
+  async updatePost(id, author, data) {
     try {
       await PostsModel.updatePostById(id, author, data);
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async write() {
+    return await getMainData(1, function() { return false; });
+  }
+
+  async insertPost(data) {
+    return await new PostsModel(data).save();
   }
 }
 

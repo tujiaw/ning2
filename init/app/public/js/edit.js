@@ -32,4 +32,24 @@
       }
     }
   })
+
+  $('.ui.form')
+    .form({
+      fields: {
+        title: {
+          identifier: 'title',
+          rules: [{
+            type: 'length[1]',
+            prompt: '您的文章标题太短，请重新输入。'
+          }]
+        },
+        content: {
+          identifier: 'content',
+          rules: [{
+            type: 'length[10]',
+            prompt: '您的文章内容太短，请重新输入。'
+          }]
+        }
+      }
+    });
 })($);

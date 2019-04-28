@@ -1,15 +1,14 @@
 {% extends "template/main.nj" %}
 {% block body_content %}
 <div class="ui segment">
-  <form class="ui edit form" action="/edit/{{ post._id }}" method="post" role="form">
-  <input id="_id" type="text" name="_id" style="display:none;" value="{{ post._id }}">
-  <input id="type" type="text" name="type" style="display:none;" value="{{ post.type }}">
-  <input id="selectedTag" type="text" name="tags" style="display:none;" value="{{ post.tags }}">
+  <form class="ui edit form" action="/write" method="post" role="form">
+  <input id="type" type="text" name="type" style="display:none;">
+  <input id="selectedTag" type="text" name="tags" style="display:none;">
     <div class="field">
       <div class="field">
         <label>文章标题</label>
         <div style="display:flex;">
-          <input type="text" name="title" value="{{ post.title }}">
+          <input type="text" name="title">
           <div style="margin:5px;"></div>
           <select class="ui compact dropdown">
             <option value="原" {% if post.type === '原'%}selected{% endif %}>原</option>
@@ -19,7 +18,7 @@
         </div>
       </div>
       <label>文章内容</label>
-      <textarea name="content" rows="18">{{ post.content }}</textarea>
+      <textarea name="content" rows="18"></textarea>
     </div>
     <div class="field">
       <label>文章类别</label>

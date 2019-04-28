@@ -25,4 +25,8 @@ UsersSchema.statics.getUserByToken = function(token) {
   return this.findOne({ token: token }).exec();
 }
 
+UsersSchema.statics.updateUserByProviderLogin = function(provider, login, content) {
+  return this.updateOne({ provider, login }, { $set: content }).exec();
+};
+
 module.exports = mongoose.blogConn.model('Users', UsersSchema);
