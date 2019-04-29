@@ -73,10 +73,10 @@ class HomeController extends Controller {
 
   async delete() {
     const { ctx } = this;
-    if (!(ctx.user && ctx.user._id)) {
-      ctx.redirect('/login');
-      return;
-    }
+    // if (!(ctx.user && ctx.user._id)) {
+    //   ctx.redirect('/login');
+    //   return;
+    // }
 
     if (!ctx.params.id) {
       ctx.body = '参数错误';
@@ -95,11 +95,6 @@ class HomeController extends Controller {
 
   async edit() {
     const { ctx } = this;
-    if (!(ctx.user && ctx.user._id)) {
-      ctx.redirect('/login');
-      return;
-    }
-
     if (!ctx.params.id) {
       ctx.body = '参数错误';
       return;
@@ -119,8 +114,8 @@ class HomeController extends Controller {
         title: body.title,
         content: body.content,
         type: body.type || '原',
-        tags: body.tags.split(',')
-      }
+        tags: body.tags.split(','),
+      };
       await ctx.service.home.updatePost(body._id, ctx.user._id, data);
       ctx.redirect('/post/' + body._id);
     }
@@ -138,8 +133,7 @@ class HomeController extends Controller {
       const data = await ctx.service.home.write();
       data.allTags = this.config.allTags;
       await render(this, 'write.nj', data);
-    }
-    else if (ctx.method === 'POST') {
+    } else if (ctx.method === 'POST') {
       const { body } = ctx.request;
       const data = {
         author: ctx.user._id,
@@ -148,7 +142,7 @@ class HomeController extends Controller {
         type: body.type || '原',
         tags: body.tags.split(','),
         pv: 1,
-      }
+      };
       const newPost = await ctx.service.home.insertPost(data);
       if (newPost) {
         ctx.redirect('/post/' + newPost._id);

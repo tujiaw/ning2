@@ -286,6 +286,11 @@ class HomeService extends Service {
   async insertPost(data) {
     return await new PostsModel(data).save();
   }
+
+  async getPostAuthor(postId) {
+    const post = await PostsModel.getPostById(postId);
+    return post ? post.author : '';
+  }
 }
 
 module.exports = HomeService;

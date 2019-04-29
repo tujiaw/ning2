@@ -12,10 +12,10 @@ module.exports = {
   },
   passport: {
     enable: true,
-    package: 'egg-passport'
+    package: 'egg-passport',
   },
   passportGithub: {
     enable: true,
-    package: 'egg-passport-github'
-  }
+    package: 'egg-passport-github',
+  },
 };

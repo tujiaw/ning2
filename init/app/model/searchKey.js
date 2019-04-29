@@ -1,6 +1,4 @@
 var mongoose = require('./mongo').mongoose;
-var config = require('../../config/config.model.js');
-var PAGE_COUNT = config.pageCount;
 
 const SearchPrefix = 'search';
 const HitPrefix = 'hit';
