@@ -23,7 +23,7 @@ module.exports = appInfo => {
 
   // add your middleware config here
   config.middleware = [ 'midhit' ];
-  config.midhit = { totalhit: 0, todayhit: 0 };
+  config.midhit = { totalhit: 0, todayhit: 0, inchit: 0 };
   config.joke = { textJokeTotalCount: 0 };
   config.passportGithub = {
     key: 'b6567207454fe7fe27d4',

@@ -5,7 +5,9 @@ const svgCaptcha = require('svg-captcha');
 const sha1 = require('sha1');
 
 async function render(self, view, data) {
-  data.right.profile = Object.assign(data.right.profile, self.config.midhit);
+  const { midhit } = self.config
+  data.right.profile.totalhit = midhit.totalhit + midhit.inchit;
+  data.right.profile.todayhit = midhit.todayhit + midhit.inchit;
   data.user = self.ctx.user;
   return await self.ctx.render(view, data);
 }

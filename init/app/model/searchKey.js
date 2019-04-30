@@ -25,6 +25,13 @@ SearchKeySchema.statics.sethit = function(todayhit, totalhit) {
     )
 }
 
+SearchKeySchema.statics.inchit = function(inchit) {
+    return Promise.all([
+        this.updateOne({ prefix: HitPrefix, key: 'todayhit' }, { $inc: {count: inchit}}, {upsert: true}).exec(), 
+        this.updateOne({ prefix: HitPrefix, key: 'totalhit' }, { $inc: {count: inchit}}, {upsert: true}).exec()]
+    )
+}
+
 SearchKeySchema.statics.hit = function() {
     return new Promise((resolve, reject) => {
         this.find({ prefix: HitPrefix }).exec()
