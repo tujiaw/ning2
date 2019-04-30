@@ -3,7 +3,7 @@
     <p></p>
     <div class="ui mini tag labels">
     {% for tag in right.tagsCount %}
-        <a class="ui mini label" href="{{ tag.url }}">
+        <a class="ui mini label" href="/tags/{{ tag.name | urlencode }}">
         {{ tag.name }}
         <div class="detail" style="margin-left: 0.5em;">{{ tag.count }}</div>
         </a>

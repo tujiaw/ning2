@@ -49,7 +49,6 @@ async function getMainData(page, filter) {
         } else {
           tagsCount.push({
             name: tag,
-            url: '/tags/' + encodeURIComponent(tag),
             count: 1,
           });
         }
