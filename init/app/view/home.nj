@@ -6,7 +6,7 @@
 {% block body_content %}
 <div class="ui link one cards">
     {% for post in posts %}
-    <div class="post card" style="margin-bottom:0.1em;">
+    <div class="post card" style="margin-bottom:0.1em;cursor:default;">
         {% if loop.first and navs and navs.length %}
         <div class="ui breadcrumb" style="margin:1em;">
             {% for nav in navs %}
