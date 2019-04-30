@@ -38,6 +38,7 @@
         <div class="item alink" href="https://www.ningto.com/mdviewer">markdown预览</div>
         <div class="item alink" href="https://www.ningto.com/html2markdown">html转markdown</div>
         <div class="item alink" href="https://www.ningto.com/uploadimage">图片上传</div>
+        <div class="item" onclick="fairyDustCursorStart();return false;">仙尘光标</div>
       </div>
     </div>
     <div class="right menu">
@@ -139,6 +140,7 @@
     </div>
   </div>
 <div class="back_to_top">回到顶部</div>
+<span class="js-cursor-container"></span>
 <script type="text/javascript" src="/public/js/home.js"></script>
 {% block body_script %}{% endblock %}
 <script>
