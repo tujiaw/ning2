@@ -27,40 +27,44 @@
   <div class="ui container">
     <div class="header item">ningto</div>
     <a class="item" href="/">首页</a>
-    <a class="item" href="https://ningto.com/about">关于</a>
-    <a class="item" href="/works">小程序</a>
-    <a class="item" href="/post/59edecd82be91645212c9981">书签</a>
-    <a class="item" href="/textjoke">笑话</a>
-    <div class="ui dropdown item">
-      工具
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <div class="item alink" href="https://www.ningto.com/mdviewer">markdown预览</div>
-        <div class="item alink" href="https://www.ningto.com/html2markdown">html转markdown</div>
-        <div class="item alink" href="https://www.ningto.com/uploadimage">图片上传</div>
-        <div class="item" onclick="fairyDustCursorStart();return false;">仙尘光标</div>
-      </div>
-    </div>
-    <div class="right menu">
-      <div class="item">
-        <div class="ui transparent inverted icon input">
-          <i class="search icon"></i>
-          <input id="search" type="text" placeholder="Search">
+    {% if pc %}
+      <a class="item" href="https://ningto.com/about">关于</a>
+      <a class="item" href="/works">小程序</a>
+    {% endif %}
+      <a class="item" href="/post/59edecd82be91645212c9981">书签</a>
+      <a class="item" href="/textjoke">笑话</a>
+    {% if pc %}
+      <div class="ui dropdown item">
+        工具
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item alink" href="https://www.ningto.com/mdviewer">markdown预览</div>
+          <div class="item alink" href="https://www.ningto.com/html2markdown">html转markdown</div>
+          <div class="item alink" href="https://www.ningto.com/uploadimage">图片上传</div>
+          <div class="item" onclick="fairyDustCursorStart();return false;">仙尘光标</div>
         </div>
       </div>
-      {% if user.login and user.login.length %}
-        <div class="ui dropdown item">
-          {{ user.login }}
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <div class="item alink" href="/write">写文章</div>
-            <div class="item alink" href="/logout">登出</div>
+      <div class="right menu">
+        <div class="item">
+          <div class="ui transparent inverted icon input">
+            <i class="search icon"></i>
+            <input id="search" type="text" placeholder="Search">
           </div>
         </div>
-      {% else %}
-        <a class="item" href="/login">登录</a>
-      {% endif %}
-    </div>
+        {% if user.login and user.login.length %}
+          <div class="ui dropdown item">
+            {{ user.login }}
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item alink" href="/write">写文章</div>
+              <div class="item alink" href="/logout">登出</div>
+            </div>
+          </div>
+        {% else %}
+          <a class="item" href="/login">登录</a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 </div>
 
@@ -81,17 +85,19 @@
     </div>
   </div>
 </div>
-<div class="ui column centered grid container">
+<div class="ui column centered grid {% if pc %}container{% endif %}">
   <div class="row">
-    <div class="eleven wide column" >
+    <div class="{% if pc %}eleven{% else %}sixteen{% endif %} wide column" >
         {% block body_content %}Miss body content{% endblock %}
     </div>
+    {% if pc %}
     <div class="five wide right column">
       {% include "template/profile.nj" %}
       {% include "template/hot_post.nj" %}
       {% include "template/tags_counter.nj" %}
       {% include "template/archive.nj" %}
     </div>
+    {% endif %}
   </div>
 </div>
 

@@ -9,6 +9,7 @@ async function render(self, view, data) {
   data.right.profile.totalhit = midhit.totalhit + midhit.inchit;
   data.right.profile.todayhit = midhit.todayhit + midhit.inchit;
   data.user = self.ctx.user;
+  data.pc = self.ctx.request.headers['user-agent'].indexOf('Mobile') < 0;
   return await self.ctx.render(view, data);
 }
 
