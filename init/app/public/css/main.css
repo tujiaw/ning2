@@ -66,4 +66,9 @@ a.posttags:hover {
 
 .profile .item .num {
   text-align: center;
+  color: grey;
+}
+
+.profile .signature {
+    font-weight: bold;
 }
