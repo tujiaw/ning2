@@ -20,7 +20,16 @@
         </div>
         {% endif %}
         <div class="content" href="/post/{{ post.id }}">
-            <div class="header">{{ post.title }}</div>
+            <div class="header">
+            {% if post.type === '原' %}
+                <a class="ui red empty circular label"></a>
+            {% elif post.type === '转' %}
+                <a class="ui green empty circular label"></a>
+            {% else %}
+                <a class="ui blue empty circular label"></a>
+            {% endif %}
+            {{ post.title }}
+            </div>
             <div class="meta">
                 <i class="tags icon"></i>
                 {% for tag in post.tags %}

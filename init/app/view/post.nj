@@ -6,8 +6,18 @@
 {% endblock %}
 {% block body_content %}
 <div class="ui segment">
-  <h2 class="ui header">{{ post.title }}</h2>
+  <h2 class="ui header">
+  {% if post.type === '原' %}
+    <a class="ui red circular label">{{post.type}}</a>
+  {% elif post.type === '转' %}
+    <a class="ui green circular label">{{post.type}}</a>
+  {% else %}
+    <a class="ui blue circular label">{{post.type}}</a>
+  {% endif %}
+  {{ post.title }}
+  </h2>
   <div class="ui meta">
+    &nbsp;&nbsp;&nbsp;
     <i class="tags icon"></i>
     {% for tag in post.tags %}
     {% if tag.length > 0 %}
