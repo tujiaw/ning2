@@ -27,7 +27,7 @@ module.exports = appInfo => {
   config.joke = { textJokeTotalCount: 0 };
   config.passportGithub = {
     key: 'b6567207454fe7fe27d4',
-    secret: '00889016698c5994c76e0e23e89687fc27d2c426',
+    secret: '75e127885221032bf832609ebb353c1c8a9de64d',
   };
   config.allTags = ['Windows', 'Linux', 'Android', 'IOS', 'Mac', 'Mobile', 'C/C++', 'Qt', 'Node.js', 'Java', 'Database', 
   'Web', 'Tools', 'Bug', 'Life', 'Tips', 'Design', 'Javascript', 'MongoDB', 
