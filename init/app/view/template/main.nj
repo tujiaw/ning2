@@ -141,12 +141,13 @@
         <a class="item" href="#">鄂ICP备17003086号</a>
         <a class="item" href="#">Copyright © 2016</a>
         <a class="item" href="#">All Rights Reserved</a>
-        <a class="item" href="#">Contact Us</a>
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1275502801'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s96.cnzz.com/z_stat.php%3Fid%3D1275502801%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
       </div>
     </div>
   </div>
 <div class="back_to_top">回到顶部</div>
 <span class="js-cursor-container"></span>
+
 <script type="text/javascript" src="/public/js/home.js"></script>
 {% block body_script %}{% endblock %}
 <script>
