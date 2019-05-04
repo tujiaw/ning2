@@ -97,9 +97,12 @@
         data: {
           commentId,
         },
-        // eslint-disable-next-line no-unused-vars
         success: result => {
-          $('#' + commentId).hide();
+          if (result === 'success') {
+            $('#' + commentId).hide();
+          } else {
+            console.error(result)
+          }
         },
       });
     }

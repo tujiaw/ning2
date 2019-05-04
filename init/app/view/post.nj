@@ -11,7 +11,7 @@
     <a class="ui red circular label">{{post.type}}</a>
   {% elif post.type === '转' %}
     <a class="ui green circular label">{{post.type}}</a>
-  {% else %}
+  {% elif post.type === '译' %}
     <a class="ui blue circular label">{{post.type}}</a>
   {% endif %}
   {{ post.title }}
