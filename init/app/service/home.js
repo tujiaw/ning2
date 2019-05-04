@@ -62,7 +62,6 @@ async function getMainData(page, filter) {
     prev: Math.max(page - 1, 0),
     next: page >= currentTotalPage ? 0 : page + 1,
   };
-  console.log(pageTurn);
 
   const right = {};
   right.profile = {

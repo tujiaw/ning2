@@ -12,8 +12,12 @@ module.exports = {
     const { midhit } = ctx.app.config;
     if (midhit.inchit > 0) {
       await SearchKey.inchit(midhit.inchit);
-      ctx.app.config.midhit = await SearchKey.hit();
-      ctx.app.config.midhit.inchit = 0;
+      const hit = await SearchKey.hit();
+      if (hit) {
+        ctx.app.config.midhit.totalhit = hit.totalhit;
+        ctx.app.config.midhit.todayhit = hit.todayhit;
+        ctx.app.config.midhit.inchit = 0;
+      }
       ctx.logger.info('update db', JSON.stringify(ctx.app.config.midhit));
     }
   },
