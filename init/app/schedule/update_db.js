@@ -8,9 +8,10 @@ module.exports = {
     type: 'all',
   },
   async task(ctx) {
-    ctx.logger.info('start job update db');
-    const { midhit } = ctx.app.config;
+    const { app } = ctx;
+    const { midhit } = app.config;
     if (midhit.inchit > 0) {
+      app.logger.info('start job update db', midhit.inchit);
       await SearchKey.inchit(midhit.inchit);
       const hit = await SearchKey.hit();
       if (hit) {

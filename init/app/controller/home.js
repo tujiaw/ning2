@@ -8,7 +8,7 @@ async function render(self, view, data) {
   const { midhit } = self.config
   data.right.profile.totalhit = midhit.totalhit + midhit.inchit;
   data.right.profile.todayhit = midhit.todayhit + midhit.inchit;
-  data.user = self.ctx.user;
+  data.user = self.ctx.user || {};
   data.pc = self.ctx.request.headers['user-agent'].indexOf('Mobile') < 0;
   return await self.ctx.render(view, data);
 }
@@ -125,7 +125,7 @@ class HomeController extends Controller {
   }
 
   async write() {
-    // 优化在router里面鉴权
+    // 优化在app.js里面鉴权
     const { ctx } = this;
     if (!(ctx.user && ctx.user._id)) {
       ctx.redirect('/login');

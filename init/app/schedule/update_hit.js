@@ -14,6 +14,7 @@ module.exports = {
     if (!isImmediate) {
       await SearchKey.clearTodayHit();
     }
+    
     const hit = await SearchKey.hit();
     if (hit) {
       ctx.app.config.midhit.totalhit = hit.totalhit;
