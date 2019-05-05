@@ -29,9 +29,13 @@ module.exports = appInfo => {
     key: 'b6567207454fe7fe27d4',
     secret: '75e127885221032bf832609ebb353c1c8a9de64d',
   };
-  config.allTags = ['Windows', 'Linux', 'Android', 'IOS', 'Mac', 'Mobile', 'C/C++', 'Qt', 'Node.js', 'Java', 'Database', 
-  'Web', 'Tools', 'Bug', 'Life', 'Tips', 'Design', 'Javascript', 'MongoDB', 
-  'React', 'Product'];
+  config.allTags = [ 'Windows', 'Linux', 'Android', 'IOS', 'Mac', 'Mobile', 'C/C++', 'Qt', 'Node.js', 'Java', 'Database',
+    'Web', 'Tools', 'Bug', 'Life', 'Tips', 'Design', 'Javascript', 'MongoDB', 'React', 'Product' ];
+
+  config.bodyParser = {
+    jsonLimit: '1mb',
+    formLimit: '1mb',
+  };
 
   // add your user config here
   const userConfig = {

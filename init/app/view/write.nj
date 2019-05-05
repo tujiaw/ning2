@@ -33,6 +33,10 @@
       <button type="submit" class="ui positive right labeled icon button">
         提交<i class="checkmark icon"></i>
       </button>
+      <div class="ui checkbox">
+        <input type="checkbox" name="link2local">
+        <label>外链转内链</label>
+      </div>
     </div>
   </form>
 </div>

@@ -3,9 +3,10 @@
 const Controller = require('egg').Controller;
 const svgCaptcha = require('svg-captcha');
 const sha1 = require('sha1');
+const util = require('../extend/util');
 
 async function render(self, view, data) {
-  const { midhit } = self.config
+  const { midhit } = self.config;
   data.right.profile.totalhit = midhit.totalhit + midhit.inchit;
   data.right.profile.todayhit = midhit.todayhit + midhit.inchit;
   data.user = self.ctx.user || {};
@@ -138,6 +139,9 @@ class HomeController extends Controller {
       await render(this, 'write.nj', data);
     } else if (ctx.method === 'POST') {
       const { body } = ctx.request;
+      if (body.link2local === 'on') {
+        body.content = util.link2local(body.content);
+      }
       const data = {
         author: ctx.user._id,
         title: body.title,

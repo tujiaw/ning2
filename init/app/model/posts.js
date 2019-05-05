@@ -32,9 +32,8 @@ PostSchema.statics.getPostsProfile = function(author, page) {
       .limit(PAGE_COUNT)
       .sort({ _id: -1 })
       .exec();
-  } else {
-    return this.find(query).sort({ _id: -1 }).exec();
   }
+  return this.find(query).sort({ _id: -1 }).exec();
 };
 
 PostSchema.statics.getPostsCount = function(author) {
@@ -50,14 +49,14 @@ PostSchema.statics.incPv = function(postId) {
 };
 
 PostSchema.statics.getPostByTag = function(tag) {
-  tag = tag.replace(/([\^\$\(\)\*\+\?\.\\\|\[\]\{\}])/g, "\\$1");
+  tag = tag.replace(/([\^\$\(\)\*\+\?\.\\\|\[\]\{\}])/g, '\\$1');
   return this.find({tags: { $in: [new RegExp(tag, 'i')]}})
     .sort({ _id: -1 })
     .exec();
 };
 
 PostSchema.statics.searchPost = function(name, onlyTitle) {
-  const keyword = name.replace(/([\^\$\(\)\*\+\?\.\\\|\[\]\{\}])/g, "\\$1");
+  const keyword = name.replace(/([\^\$\(\)\*\+\?\.\\\|\[\]\{\}])/g, '\\$1');
   let cond = {
     '$or': [
       {title: new RegExp(keyword, 'i')},
