@@ -67,5 +67,4 @@
 {% block body_script %}
 <script src="https://cdn.bootcss.com/js-sha1/0.6.0/sha1.min.js"></script>
 <script type="text/javascript" src="/public/js/post.js"></script>
-<script type="text/javascript" src="/public/js/comment.js"></script>
 {% endblock %}
