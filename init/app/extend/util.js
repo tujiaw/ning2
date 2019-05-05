@@ -67,7 +67,7 @@ exports.getRandomItems = function(arr, num) {
   return return_array;
 };
 
-exports.link2local = function(content, host = 'next.ningto.com/public/upload/', dstDir = './app/public/upload/') {
+exports.link2local = function(content, host = 'http://next.ningto.com/public/upload/', dstDir = './app/public/upload/') {
   if (!fs.existsSync(dstDir)) { fs.mkdirSync(dstDir); }
 
   const resultList = [];
