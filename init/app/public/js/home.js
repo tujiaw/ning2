@@ -83,19 +83,20 @@ $('.alink').on('click', function() {
 $('a.postDelete').on('click', function() {
   const url = $(this).attr('url');
   $('.ui.mini.modal').modal({
-    onApprove: function() {
+    onApprove() {
       window.location.href = url;
-    }
+    },
   }).modal('show');
   return false;
-})
+});
 
-function fairyDustCursor(isStart) {  
-  var possibleColors = ["#D61C59", "#E7D84B", "#1B8798"]
-  var width = window.innerWidth;
-  var height = window.innerHeight;
-  var cursor = {x: width/2, y: width/2};
-  var particles = [];
+function fairyDustCursor(isStart) {
+  const possibleColors = [ '#D61C59', '#E7D84B', '#1B8798' ];
+  let width = window.innerWidth;
+  // eslint-disable-next-line no-unused-vars
+  let height = window.innerHeight;
+  const cursor = { x: width / 2, y: width / 2 };
+  const particles = [];
 
   function init() {
     if (isStart) {
@@ -106,7 +107,7 @@ function fairyDustCursor(isStart) {
     }
   }
 
-  function onWindowResize(e) {
+  function onWindowResize() {
     width = window.innerWidth;
     height = window.innerHeight;
   }
@@ -115,13 +116,13 @@ function fairyDustCursor(isStart) {
     cursor.x = e.clientX;
     cursor.y = e.clientY;
 
-    addParticle( cursor.x, cursor.y, possibleColors[Math.floor(Math.random()*possibleColors.length)]);
+    addParticle(cursor.x, cursor.y, possibleColors[Math.floor(Math.random() * possibleColors.length)]);
   }
 
   // Bind events that are needed
   function bindEvents() {
-      $(document).bind('mousemove', onMouseMove);
-      $(window).bind('resize', onWindowResize);
+    $(document).bind('mousemove', onMouseMove);
+    $(window).bind('resize', onWindowResize);
   }
 
   function unbindEvents() {
@@ -130,7 +131,7 @@ function fairyDustCursor(isStart) {
   }
 
   function addParticle(x, y, color) {
-    var particle = new Particle();
+    const particle = new Particle();
     particle.init(x, y, color);
     particles.push(particle);
   }
@@ -138,18 +139,17 @@ function fairyDustCursor(isStart) {
   function updateParticles() {
 
     // Updated
-    for( var i = 0; i < particles.length; i++ ) {
+    for (let i = 0; i < particles.length; i++) {
       particles[i].update();
     }
 
     // Remove dead particles
-    for( var i = particles.length -1; i >= 0; i-- ) {
-      if( particles[i].lifeSpan < 0 ) {
+    for (let i = particles.length - 1; i >= 0; i--) {
+      if (particles[i].lifeSpan < 0) {
         particles[i].die();
         particles.splice(i, 1);
       }
     }
-
   }
 
   function loop() {
@@ -163,29 +163,29 @@ function fairyDustCursor(isStart) {
 
   function Particle() {
 
-    this.character = "*";
-    this.lifeSpan = 120; //ms
-    this.initialStyles ={
-      "position": "fixed",
-      "display": "inline-block",
-      "top": "0px",
-      "left": "0px",
-      "pointerEvents": "none",
-      "touch-action": "none",
-      "z-index": "10000000",
-      "fontSize": "25px",
-      "will-change": "transform"
+    this.character = '*';
+    this.lifeSpan = 120; // ms
+    this.initialStyles = {
+      position: 'fixed',
+      display: 'inline-block',
+      top: '0px',
+      left: '0px',
+      pointerEvents: 'none',
+      'touch-action': 'none',
+      'z-index': '10000000',
+      fontSize: '25px',
+      'will-change': 'transform',
     };
 
     // Init, and set properties
     this.init = function(x, y, color) {
 
       this.velocity = {
-        x:  (Math.random() < 0.5 ? -1 : 1) * (Math.random() / 2),
-        y: 1
+        x: (Math.random() < 0.5 ? -1 : 1) * (Math.random() / 2),
+        y: 1,
       };
 
-      this.position = {x: x + 10, y: y + 10};
+      this.position = { x: x + 10, y: y + 10 };
       this.initialStyles.color = color;
 
       this.element = document.createElement('span');
@@ -201,13 +201,12 @@ function fairyDustCursor(isStart) {
       this.position.y += this.velocity.y;
       this.lifeSpan--;
 
-      this.element.style.transform = "translate3d(" + this.position.x + "px," + this.position.y + "px, 0) scale(" + (this.lifeSpan / 120) + ")";
-    }
+      this.element.style.transform = 'translate3d(' + this.position.x + 'px,' + this.position.y + 'px, 0) scale(' + (this.lifeSpan / 120) + ')';
+    };
 
-      this.die = function () {
-            this.element.parentNode.removeChild(this.element);
-    }
-
+    this.die = function() {
+      this.element.parentNode.removeChild(this.element);
+    };
   }
 
   /**
@@ -215,8 +214,8 @@ function fairyDustCursor(isStart) {
    */
 
   // Applies css `properties` to an element.
-  function applyProperties( target, properties ) {
-    for( var key in properties ) {
+  function applyProperties(target, properties) {
+    for (const key in properties) {
       target.style[ key ] = properties[ key ];
     }
   }
@@ -226,15 +225,17 @@ function fairyDustCursor(isStart) {
 
 function setLocalCursor(value) {
   if (window.localStorage) {
-    window.localStorage['fairyDustCursor'] = value;
+    window.localStorage.fairyDustCursor = value;
   }
 }
 function getLocalCursor() {
   if (window.localStorage) {
-    return window.localStorage['fairyDustCursor'];
+    return window.localStorage.fairyDustCursor;
   }
   return '';
 }
+
+// eslint-disable-next-line no-unused-vars
 function fairyDustCursorStart() {
   let isStart = getLocalCursor() === 'true';
   isStart = !isStart;

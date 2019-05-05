@@ -20,6 +20,20 @@
     margin-bottom: 2px;
 }
 
+#toc ul {
+  padding-left: 1em;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+#toc-head {
+  display: flex;
+  flex: 1;
+  font-weight: bold;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
 footer.reference {
   margin-top: 15px;
   font-size: 11px;
