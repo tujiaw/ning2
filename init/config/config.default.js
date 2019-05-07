@@ -30,7 +30,7 @@ module.exports = appInfo => {
     secret: '75e127885221032bf832609ebb353c1c8a9de64d',
   };
   config.allTags = [ 'Windows', 'Linux', 'Android', 'IOS', 'Mac', 'Mobile', 'C/C++', 'Qt', 'Node.js', 'Java', 'Database',
-    'Web', 'Tools', 'Bug', 'Life', 'Tips', 'Design', 'Javascript', 'MongoDB', 'React', 'Product' ];
+    'Web', 'Tools', 'Bug', 'Life', 'Tips', 'Design', 'Javascript', 'MongoDB', 'React', 'Product', 'Go' ];
 
   config.bodyParser = {
     jsonLimit: '1mb',
