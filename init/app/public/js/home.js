@@ -2,7 +2,7 @@
 
 $('#search').bind('search', function() {
   const text = $(this).val();
-  if (text.length <= 2) {
+  if (text.length < 2) {
     console.log('search text is too short!');
     return;
   }
