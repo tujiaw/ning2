@@ -1,3 +1,6 @@
+.ui .meta {
+  color:#333;
+}
 .anchor-fix {
     display: block;
     height: 20px; /*same height as header*/

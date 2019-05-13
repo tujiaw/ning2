@@ -1,13 +1,24 @@
 body {
-    background-color: #e2e2e2;
-    background-image: url(/public/img/shadow_light.png);
-    background-repeat: repeat-x;
+    background: #554 url(/public/img/bg.gif);
+    font: small/1.5em georgia, times, serif;
 }
 
 .ui.cards {
   margin:0px;
 }
 
+.ui.card, .ui.cards>.card {
+    background-color: rgb(253,245, 219, 0.8);
+    /* border-radius:0px; */
+}
+
+.ui.segment {
+    background-color:rgb(253,245, 219, 0.8);
+}
+.right .ui.segment {
+    background-color:rgb(192, 64, 13, 0.8);
+    color:#ddd;
+}
 .header.title:hover {
   text-decoration:underline;
   cursor: pointer;
@@ -23,12 +34,15 @@ body {
     padding-right: 0.8em;
 }
 
-.ui.list .list > a.item, .ui.list > a.item {
-    color: #777;
+.right .ui.list .list > a.item, .ui.list > a.item {
+    color: #efece3;
+    /* margin-left: -12px; */
+    padding-left: 12px;
+    background: url(/public/img/arrow.gif) no-repeat 0 60%;
 }
 
 .ui.list .list > a.item, .ui.list > a.item:hover {
-    color: #444;
+    color: #ec9;
 }
 
 .right.column {
@@ -51,7 +65,7 @@ body {
 }
 
 a.posttags {
-    background-color: #f5f5f5;
+    background-color: #f93;
     font-size: 12px;
     line-height: 12px;
     display: inline-block;
@@ -60,7 +74,7 @@ a.posttags {
     -webkit-border-radius: 2px;
     border-radius: 2px;
     text-decoration: none;
-    color: #999;
+    color: #edb;
 }
 
 a.posttags:hover {
@@ -75,7 +89,7 @@ a.posttags:hover {
 
 .profile .item .num {
   text-align: center;
-  color: grey;
+  color: #ccc;
 }
 
 .profile .signature {
