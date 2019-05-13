@@ -4,6 +4,15 @@ body {
     background-repeat: repeat-x;
 }
 
+.ui.cards {
+  margin:0px;
+}
+
+.header.title:hover {
+  text-decoration:underline;
+  cursor: pointer;
+}
+
 .ui.footer.segment {
     margin: 5em 0em 0em;
     padding: 5em 0em;

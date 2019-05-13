@@ -15,7 +15,7 @@ $('#search').keyup(function(e) {
   }
 });
 
-$('.post.card .content').on('click', function() {
+$('.header.title').on('click', function() {
   const url = $(this).attr('href') || '';
   if (url.length) {
     window.location.href = url;

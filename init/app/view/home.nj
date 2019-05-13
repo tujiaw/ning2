@@ -4,9 +4,9 @@
 {% endblock %}
 
 {% block body_content %}
-<div class="ui link one cards">
+<div class="ui one cards">
     {% for post in posts %}
-    <div class="post card" style="margin-bottom:0.1em;cursor:default;">
+    <div class="post card" style="margin-top:0px;margin-bottom:0px;cursor:default;">
         {% if loop.first and navs and navs.length %}
         <div class="ui breadcrumb" style="margin:1em;">
             {% for nav in navs %}
@@ -19,8 +19,8 @@
             {% endfor %}
         </div>
         {% endif %}
-        <div class="content" href="/post/{{ post.id }}">
-            <div class="header">
+        <div class="content">
+            <div class="header title" href="/post/{{ post.id }}">
             {% if post.type === '原' %}
                 <a class="ui red empty circular label"></a>
             {% elif post.type === '转' %}
