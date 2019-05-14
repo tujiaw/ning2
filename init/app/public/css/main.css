@@ -1,6 +1,6 @@
 body {
     background: #554 url(/public/img/bg.gif);
-    font: small/1.5em georgia, times, serif;
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
 }
 
 .ui.cards {
@@ -8,22 +8,22 @@ body {
 }
 
 .ui.card, .ui.cards>.card {
-    background-color: rgb(253,245, 219, 0.8);
+    background-color: rgb(253,245, 219);
     /* border-radius:0px; */
 }
 
 .ui.segment {
-    background-color:rgb(253,245, 219, 0.8);
+    background-color:rgb(253,245, 219);
 }
 .right .ui.segment {
-    background-color:rgb(192, 64, 13, 0.8);
-    color:#ddd;
+    background-color:rgb(192, 64, 13);
+    color:#eee;
 }
 .header.title:hover {
   text-decoration:underline;
   cursor: pointer;
-}
-
+}   
+    
 .ui.footer.segment {
     margin: 5em 0em 0em;
     padding: 5em 0em;
@@ -32,6 +32,12 @@ body {
 .ui.tag.labels .label, .ui.tag.label {
     padding-left: 1.1em;
     padding-right: 0.8em;
+    background:rgb(176, 45, 13, .8);
+    color: #efece3;
+}
+
+.ui.tag.labels .label:hover, .ui.tag.label:hover {
+    background:rgb(155, 41, 16);
 }
 
 .right .ui.list .list > a.item, .ui.list > a.item {

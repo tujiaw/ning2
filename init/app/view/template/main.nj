@@ -101,7 +101,7 @@
   </div>
 </div>
 
-<div class="ui vertical footer segment">
+<div class="ui vertical footer segment" style="background:rgb(0, 0, 0, 0.3)">
     <div class="ui center aligned container">
       <div class="ui stackable inverted divided grid">
         <div class="three wide column">
